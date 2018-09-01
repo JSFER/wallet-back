@@ -1,0 +1,13 @@
+.m-header{
+    box-sizing: border-box;
+    height: 48px;
+    line-height: 48px;
+    background: #3278A7;
+
+    & .info{
+        float: right;
+        margin-right: 20px;
+        font-size: 15px;
+        color: #fff;
+    }
+}

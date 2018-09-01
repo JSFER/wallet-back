@@ -37,7 +37,7 @@ const HomeRoute = ({ component: Component, ...rest }) => (
 const Root = () => (
     <Router>
         <div id="root">
-            <HomeRoute exact path="/" component={App} />
+            <HomeRoute path="/" component={App} />
             <Route exact path="/login" component={Login} />
         </div>
     </Router>

@@ -12,9 +12,7 @@ import { connect } from 'react-redux'
 import './Login.css'
 
 const { Row, Col } = Grid
-
-// 寻找背景图片可以从 https://unsplash.com/ 寻找
-const backgroundImage = require('./images/background.png')
+const backgroundImage = '//pdxzogn6s.bkt.clouddn.com/background.png'
 
 @withRouter
 @connect()

@@ -39,6 +39,7 @@ export default class MenuBar extends React.Component {
                         }
                     >
                         <Menu.Item key="product">总览</Menu.Item>
+                        <Menu.Item key="product/add">产品录入</Menu.Item>
                     </SubMenu>
                     <SubMenu
                         key="pageManage"

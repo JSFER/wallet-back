@@ -8,12 +8,13 @@ import MenuBar from '@src/components/MenuBar/MenuBar'
 // pages
 import ProductManage from '@src/container/ProductManage/ProductManage'
 import PageManage from '@src/container/PageManage/PageManage'
+import ProductAdd from '@src/container/ProductAdd/ProductAdd'
 
 // style
 import './App.css'
 
 class App extends Component {
-    renderHome = () => <div className="welcome">欢迎使用xxxx</div>
+    renderHome = () => <div className="welcome">欢迎使用群楚后台管理系统</div>
     render() {
         return (
             <div className="page-app">
@@ -24,6 +25,7 @@ class App extends Component {
                 <div className="main">
                     <Route exact path="/" render={this.renderHome} />
                     <Route exact path="/product" component={ProductManage} />
+                    <Route exact path="/product/add" component={ProductAdd} />
                     <Route exact path="/page" component={PageManage} />
                 </div>
             </div>

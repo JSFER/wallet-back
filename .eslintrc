@@ -27,7 +27,8 @@
         "react/jsx-indent": [1, 4],
         "react/jsx-indent-props": [0],
         "no-confusing-arrow": [0],
-        "no-debugger": [1]
+        "no-debugger": [1],
+        "linebreak-style": [0]
     },
     "parserOptions": {
         "ecmaVersion": 7,

@@ -10,7 +10,9 @@ const SubMenu = Menu.SubMenu
 @withRouter
 export default class MenuBar extends React.Component {
     handleMenuClick = value => {
-        this.props.history.push(`/${value.key}`)
+        const path = value.key === 'home' ? '/' : `/${value.key}`
+
+        this.props.history.push(path)
     }
     render() {
         const { width } = this.props
@@ -23,6 +25,10 @@ export default class MenuBar extends React.Component {
                     defaultOpenKeys={['productManage', 'pageManage']}
                     mode="inline"
                 >
+                    <Menu.Item key="home">
+                        <Icon type="home" />
+                        <span>首页</span>
+                    </Menu.Item>
                     <SubMenu
                         key="productManage"
                         title={

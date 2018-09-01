@@ -6,7 +6,6 @@ import {
   FormBinder as IceFormBinder,
   FormError as IceFormError,
 } from '@icedesign/form-binder';
-import IceIcon from '@icedesign/icon';
 import './Login.css';
 
 const { Row, Col } = Grid;
@@ -27,7 +26,6 @@ export default class UserLogin extends Component {
       value: {
         account: undefined,
         password: undefined,
-        checkbox: false,
       },
     };
   }
@@ -62,7 +60,7 @@ export default class UserLogin extends Component {
         />
         <div style={styles.contentWrapper} className="content-wrapper">
           <h2 style={styles.slogan} className="slogan">
-            欢迎使用 <br /> ICE 内容管理系统
+            欢迎使用 <br /> 群楚科技后台管理系统
           </h2>
           <div style={styles.formContainer}>
             <h4 style={styles.formTitle}>登录</h4>
@@ -74,11 +72,7 @@ export default class UserLogin extends Component {
               <div style={styles.formItems}>
                 <Row style={styles.formItem}>
                   <Col>
-                    <IceIcon
-                      type="person"
-                      size="small"
-                      style={styles.inputIcon}
-                    />
+                    <i style={styles.icon} className="iconfont icon-user"></i> 
                     <IceFormBinder name="account" required message="必填">
                       <Input maxLength={20} placeholder="会员名/邮箱/手机号" />
                     </IceFormBinder>
@@ -90,25 +84,13 @@ export default class UserLogin extends Component {
 
                 <Row style={styles.formItem}>
                   <Col>
-                    <IceIcon
-                      type="lock"
-                      size="small"
-                      style={styles.inputIcon}
-                    />
+                    <i style={styles.icon} className="iconfont icon-3701mima"></i> 
                     <IceFormBinder name="password" required message="必填">
                       <Input htmlType="password" placeholder="密码" />
                     </IceFormBinder>
                   </Col>
                   <Col>
                     <IceFormError name="password" />
-                  </Col>
-                </Row>
-
-                <Row style={styles.formItem}>
-                  <Col>
-                    <IceFormBinder name="checkbox">
-                      <Checkbox style={styles.checkbox}>记住账号</Checkbox>
-                    </IceFormBinder>
                   </Col>
                 </Row>
 
@@ -199,4 +181,11 @@ const styles = {
     color: '#dcd6d6',
     margin: '0 8px',
   },
+  icon: {
+    color: '#aaa',
+    position: 'absolute',
+    left: 0,
+    top: 5,
+    fontSize: 15
+  }
 };

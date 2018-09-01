@@ -5,7 +5,7 @@
         "consistent-return": [1],
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "global-require": [1],
-        "import/prefer-default-export": [1],
+        "import/prefer-default-export": [0],
         "react/no-multi-comp": [0],
         "react/prop-types": [0],
         "react/prefer-stateless-function": [0],
@@ -24,7 +24,10 @@
         "no-param-reassign": [2],
         "indent": ["error", 4],
         "semi": [0],
-        "react/jsx-indent": [1, 4]
+        "react/jsx-indent": [1, 4],
+        "react/jsx-indent-props": [0],
+        "no-confusing-arrow": [0],
+        "no-debugger": [1]
     },
     "parserOptions": {
         "ecmaVersion": 7,

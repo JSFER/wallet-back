@@ -6,9 +6,10 @@ import Header from '@src/components/Header/Header'
 import MenuBar from '@src/components/MenuBar/MenuBar'
 
 // pages
-import ProductManage from '@src/container/ProductManage/ProductManage'
 import PageManage from '@src/container/PageManage/PageManage'
+import ProductManage from '@src/container/ProductManage/ProductManage'
 import ProductAdd from '@src/container/ProductAdd/ProductAdd'
+import ProductGroup from '@src/container/ProductGroup/ProductGroup'
 
 // style
 import './App.css'
@@ -26,6 +27,7 @@ class App extends Component {
                     <Route exact path="/" render={this.renderHome} />
                     <Route exact path="/product" component={ProductManage} />
                     <Route exact path="/product/add" component={ProductAdd} />
+                    <Route exact path="/product/group" component={ProductGroup} />
                     <Route exact path="/page" component={PageManage} />
                 </div>
             </div>

@@ -23,7 +23,8 @@
         "no-continue": [0],
         "no-param-reassign": [2],
         "indent": ["error", 4],
-        "semi": [0]
+        "semi": [0],
+        "react/jsx-indent": [1, 4]
     },
     "parserOptions": {
         "ecmaVersion": 7,

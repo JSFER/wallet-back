@@ -1,0 +1,5 @@
+@import './reset.css';
+
+html, body{
+    background: #f6f6f6;
+}

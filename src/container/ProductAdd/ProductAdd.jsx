@@ -85,7 +85,7 @@ export default class ProductAdd extends React.Component {
                             </FormItem>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row gutter={16}>
                         <Col span={12}>
                             <FormItem label="产品logo">
                                 {getFieldDecorator('logoUrl')(<Input placeholder="请输入产品logo的链接，不填将使用默认logo" />)}

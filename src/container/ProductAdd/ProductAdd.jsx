@@ -1,9 +1,11 @@
 import React from 'react'
-import { Row, Col, Form, Input, Select, Button } from 'antd'
+import { Row, Col, Form, Input, Select, Button, notification } from 'antd'
+import { connect } from 'react-redux'
 
 const FormItem = Form.Item
 const Option = Select.Option
 
+@connect()
 @Form.create()
 export default class ProductAdd extends React.Component {
     handleSubmit = e => {
@@ -11,7 +13,20 @@ export default class ProductAdd extends React.Component {
 
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values)
+                this.props.dispatch({
+                    type: 'Product/addProductAction',
+                    payload: {
+                        ...values,
+                        cb: () => {
+                            this.props.form.resetFields()
+
+                            notification.info({
+                                message: '提示',
+                                description: '添加成功!',
+                            })
+                        },
+                    },
+                })
             }
         })
     }
@@ -61,7 +76,9 @@ export default class ProductAdd extends React.Component {
                         </Col>
                         <Col span={12}>
                             <FormItem label="url">
-                                {getFieldDecorator('url')(<Input placeholder="请输入产品链接" />)}
+                                {getFieldDecorator('url', {
+                                    rules: [{ required: true, message: '产品链接不能为空' }],
+                                })(<Input placeholder="请输入产品链接" />)}
                             </FormItem>
                         </Col>
                     </Row>

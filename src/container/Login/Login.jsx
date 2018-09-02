@@ -55,7 +55,7 @@ export default class UserLogin extends Component {
                     cb : () => {
                       notification.info({
                         message: '登陆成功！',
-                        duration: 1,
+                        duration: .5,
                         onClose: () => {
                           history.push('/')
                         }

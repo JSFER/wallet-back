@@ -21,6 +21,11 @@ const HomeRoute = ({ component: Component, ...rest }) => (
                 App: { hasLogin },
             } = store.getState()
 
+            // 因为HomeRoute是非exact匹配，所以当路由重定向为/login后依然会渲染HomeRoute，防止重复渲染（待优化）
+            if (props.location.pathname.indexOf('login') !== -1) {
+                return null
+            }
+
             return hasLogin ? (
                 <Component {...props} />
             ) : (

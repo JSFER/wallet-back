@@ -9,27 +9,27 @@ import './ProductManage.css'
 const FormItem = Form.Item
 const Option = Select.Option
 
-const data = []
-
-for (let i = 0; i < 100; i++) {
-    data.push({
-        name: 123,
-        profile: '123',
-        status: 0,
-        url: 'https://jin.baidu.com/mkt/cloan/guide?code=0122huoke01&channel=JXJhuoke&spot=yy-wallet-2018041813',
-        limit: 123,
-        applyForCount: 1234,
-        type: 123,
-    })
-}
-
-@connect()
+@connect(state => ({
+    ...state.Product,
+}))
 @Form.create()
 export default class ProductManage extends React.Component {
+    componentDidMount() {
+        this.props.dispatch({
+            type: 'Product/queryProductsAction',
+            payload: {
+                params: {
+                    current: 1,
+                    size: 10,
+                },
+            },
+        })
+    }
     handleSubmit = e => {
         e.preventDefault()
     }
     render() {
+        const { products } = this.props
         const { getFieldDecorator } = this.props.form
         const formItemLayout = {
             labelCol: {
@@ -93,7 +93,7 @@ export default class ProductManage extends React.Component {
                             }),
                         }}
                         columns={columns}
-                        dataSource={data}
+                        dataSource={products}
                     />
                 </div>
             </div>

@@ -25,7 +25,7 @@ axios.interceptors.response.use(
 
         if (data.code !== 0) {
             notification.error({
-                message: '请求失败',
+                message: '提示',
                 description: data.message,
             })
         }

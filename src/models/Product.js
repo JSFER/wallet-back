@@ -3,11 +3,16 @@ import ApiService from '@src/utils/ApiService'
 const Product = {
     state: {
         products: [],
+        current: 1,
+        size: 10,
+        total: 0,
     },
     reducers: {
-        updateProducts: (state, payload) => ({
+        updateProduct: (state, { products, total, current }) => ({
             ...state,
-            products: payload,
+            products,
+            total,
+            current,
         }),
     },
     effects: dispatch => ({
@@ -19,12 +24,18 @@ const Product = {
             }
         },
         async queryProductsAction({ params }) {
-            const res = await ApiService.get('/api/product/query', params)
+            const res = await ApiService.get('/api/product/query', { params })
 
             if (res.code === 0) {
+                const { products, total, current } = res.data
+
                 dispatch({
-                    type: 'Product/updateProducts',
-                    payload: res.data,
+                    type: 'Product/updateProduct',
+                    payload: {
+                        products,
+                        total,
+                        current,
+                    },
                 })
             }
         },

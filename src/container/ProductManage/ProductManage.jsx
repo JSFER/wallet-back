@@ -28,8 +28,19 @@ export default class ProductManage extends React.Component {
     handleSubmit = e => {
         e.preventDefault()
     }
+    handlePageChage = next => {
+        this.props.dispatch({
+            type: 'Product/queryProductsAction',
+            payload: {
+                params: {
+                    current: next,
+                    size: 10,
+                },
+            },
+        })
+    }
     render() {
-        const { products } = this.props
+        const { products, current, size, total } = this.props
         const { getFieldDecorator } = this.props.form
         const formItemLayout = {
             labelCol: {
@@ -94,6 +105,12 @@ export default class ProductManage extends React.Component {
                         }}
                         columns={columns}
                         dataSource={products}
+                        pagination={{
+                            current,
+                            pageSize: size,
+                            total,
+                            onChange: this.handlePageChage,
+                        }}
                     />
                 </div>
             </div>

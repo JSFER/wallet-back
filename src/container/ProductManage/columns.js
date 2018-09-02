@@ -28,6 +28,20 @@ export default [
     {
         title: '链接',
         dataIndex: 'url',
+        render: text => {
+            return (
+                <p
+                    style={{
+                        maxWidth: 200,
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                    }}
+                >
+                    {text}
+                </p>
+            )
+        },
     },
     {
         title: '操作',

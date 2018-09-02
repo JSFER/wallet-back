@@ -9,26 +9,19 @@ import './ProductManage.css'
 const FormItem = Form.Item
 const Option = Select.Option
 
-const data = [
-    {
+const data = []
+
+for (let i = 0; i < 100; i++) {
+    data.push({
         name: 123,
         profile: '123',
         status: 0,
-        url: 123412314,
+        url: 'https://jin.baidu.com/mkt/cloan/guide?code=0122huoke01&channel=JXJhuoke&spot=yy-wallet-2018041813',
         limit: 123,
         applyForCount: 1234,
         type: 123,
-    },
-    {
-        name: 123,
-        type: 123,
-        profile: '123',
-        status: 0,
-        url: 123412314,
-        limit: 123,
-        applyForCount: 1234,
-    },
-]
+    })
+}
 
 @connect()
 @Form.create()

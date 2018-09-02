@@ -40,7 +40,7 @@ const HomeRoute = ({ component: Component, ...rest }) => (
 )
 
 const Root = () => (
-    <Router>
+    <Router basename="/admin">
         <div id="root">
             <HomeRoute path="/" component={App} />
             <Route exact path="/login" component={Login} />

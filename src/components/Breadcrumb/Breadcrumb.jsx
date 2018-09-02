@@ -45,7 +45,7 @@ export default class BreadcrumbCustom extends Component {
     render() {
         return (
             <span>
-                <Breadcrumb style={{ margin: '12px 0' }}>
+                <Breadcrumb style={{ padding: '12px 0' }}>
                     {this.state.extraBreadcrumbItems}
                 </Breadcrumb>
             </span>

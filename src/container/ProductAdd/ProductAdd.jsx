@@ -16,7 +16,10 @@ export default class ProductAdd extends React.Component {
                 this.props.dispatch({
                     type: 'Product/addProductAction',
                     payload: {
-                        ...values,
+                        params: {
+                            ...values,
+                            status: 0,
+                        },
                         cb: () => {
                             this.props.form.resetFields()
 
@@ -79,6 +82,13 @@ export default class ProductAdd extends React.Component {
                                 {getFieldDecorator('url', {
                                     rules: [{ required: true, message: '产品链接不能为空' }],
                                 })(<Input placeholder="请输入产品链接" />)}
+                            </FormItem>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={12}>
+                            <FormItem label="产品logo">
+                                {getFieldDecorator('logoUrl')(<Input placeholder="请输入产品logo的链接，不填将使用默认logo" />)}
                             </FormItem>
                         </Col>
                     </Row>

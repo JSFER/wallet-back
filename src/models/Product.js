@@ -4,15 +4,8 @@ const Product = {
     state: {},
     reducers: {},
     effects: () => ({
-        async addProductAction({ name, type, profile, limit, applyForCount, url, cb }) {
-            const res = await ApiService.post('/api/product/save', {
-                name,
-                type,
-                limit,
-                profile,
-                applyForCount,
-                url,
-            })
+        async addProductAction({ params, cb }) {
+            const res = await ApiService.post('/api/product/save', params)
 
             if (res.code === 0) {
                 cb()

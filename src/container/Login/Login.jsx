@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react'
 import { Input, Button, Grid } from '@icedesign/base'
-import { notification } from 'antd'
+import { notification,Spin, Icon } from 'antd'
 import { withRouter } from 'react-router-dom'
 import {
     FormBinderWrapper as IceFormBinderWrapper,
@@ -10,7 +10,7 @@ import {
 } from '@icedesign/form-binder'
 import { connect } from 'react-redux'
 import './Login.css'
-
+// import 'antd/dist/antd.css';
 const { Row, Col } = Grid
 const backgroundImage = '//pdxzogn6s.bkt.clouddn.com/background.png'
 
@@ -28,6 +28,7 @@ export default class UserLogin extends Component {
                 username: undefined,
                 password: undefined,
             },
+            showSpin:false,
         }
     }
 
@@ -41,32 +42,38 @@ export default class UserLogin extends Component {
         e.preventDefault()
 
         const { dispatch, history } = this.props
-
-        this.refs.form.validateAll((errors, values) => {
-            if (errors) {
-                console.log('errors', errors)
-                return
-            }
-
-            dispatch({
-                type: 'App/userLoginAction',
-                payload: {
-                    ...values,
-                    cb : () => {
-                      notification.info({
-                        message: '登陆成功！',
-                        duration: .5,
-                        onClose: () => {
-                          history.push('/')
+        if(!this.state.showSpin){
+            this.setState({showSpin:true})
+            this.refs.form.validateAll((errors, values) => {
+                if (errors) {
+                    console.log('errors', errors)
+                    return
+                }
+    
+                dispatch({
+                    type: 'App/userLoginAction',
+                    payload: {
+                        ...values,
+                        cb : () => {
+                          this.setState({showSpin:false})
+                          notification.info({
+                            message: '登陆成功！',
+                            duration: .5,
+                            onClose: () => {
+                              history.push('/')
+                            }
+                          })
                         }
-                      })
-                    }
-                },
+                    },
+                })
             })
-        })
+        }
+
     }
 
     render() {
+        const { showSpin }  = this.state
+        const antIcon = <Icon type="loading" style={{ fontSize: 24, color:'red' }} spin />;
         return (
             <div style={styles.userLogin} className="user-login">
                 <div
@@ -109,7 +116,7 @@ export default class UserLogin extends Component {
 
                                 <Row style={styles.formItem}>
                                     <Button type="primary" onClick={this.handleSubmit} style={styles.submitBtn}>
-                                        登 录
+                                        登 录    {showSpin && <Spin indicator={antIcon}/>}
                                     </Button>
                                 </Row>
 

@@ -10,6 +10,7 @@ import {
 } from '@icedesign/form-binder'
 import { connect } from 'react-redux'
 import './Login.css'
+// import { runInDebugContext } from 'vm';
 // import 'antd/dist/antd.css';
 const { Row, Col } = Grid
 const backgroundImage = '//pdxzogn6s.bkt.clouddn.com/background.png'
@@ -63,6 +64,9 @@ export default class UserLogin extends Component {
                               history.push('/')
                             }
                           })
+                        },
+                        errorCb : () =>{
+                            this.setState({showSpin:false})
                         }
                     },
                 })
@@ -73,7 +77,7 @@ export default class UserLogin extends Component {
 
     render() {
         const { showSpin }  = this.state
-        const antIcon = <Icon type="loading" style={{ fontSize: 24, color:'red' }} spin />;
+        const antIcon = <Icon type="loading" style={{ fontSize: 24, color:'rgb(85,85,85)' }} spin />;
         return (
             <div style={styles.userLogin} className="user-login">
                 <div
@@ -115,8 +119,8 @@ export default class UserLogin extends Component {
                                 </Row>
 
                                 <Row style={styles.formItem}>
-                                    <Button type="primary" onClick={this.handleSubmit} style={styles.submitBtn}>
-                                        登 录    {showSpin && <Spin indicator={antIcon}/>}
+                                    <Button type="primary" onClick={this.handleSubmit} style={showSpin?styles.submitLoadingBtn:styles.submitBtn}>
+                                        登 录{showSpin && ' 中...'}{showSpin && <Spin indicator={antIcon}/>}
                                     </Button>
                                 </Row>
 
@@ -181,6 +185,12 @@ const styles = {
         width: '240px',
         background: '#3080fe',
         borderRadius: '28px',
+    },
+    submitLoadingBtn: {
+        width: '240px',
+        background: '#3080fe',
+        borderRadius: '28px',
+        color: 'rgb(85,85,85)',
     },
     checkbox: {
         marginLeft: '5px',

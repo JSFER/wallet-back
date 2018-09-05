@@ -14,7 +14,7 @@ const App = {
         }),
     },
     effects: dispatch => ({
-        async userLoginAction({ username, password, cb = noop }) {
+        async userLoginAction({ username, password, cb = noop, errorCb = noop }) {
             const res = await ApiService.post('/api/user/login', { username, password })
 
             if (res.code === 0) {
@@ -27,6 +27,8 @@ const App = {
                 })
 
                 cb()
+            } else {
+                errorCb()
             }
         },
     }),

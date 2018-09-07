@@ -40,6 +40,7 @@ export default class ProductManage extends React.Component {
         })
     }
     render() {
+        debugger
         const { products, current, size, total } = this.props
         const { getFieldDecorator } = this.props.form
         const formItemLayout = {

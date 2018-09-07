@@ -1,5 +1,5 @@
 import React from 'react'
-import { Divider } from 'antd'
+import { Divider, Button, Popconfirm, message, Modal } from 'antd'
 
 export default [
     {
@@ -52,12 +52,31 @@ export default [
     {
         title: '操作',
         key: 'action',
-        render: () => (
-            <span>
-                <span>编辑</span>
-                <Divider type="vertical" />
-                <span>删除</span>
-            </span>
-        ),
+        render: row => {
+            console.log(row)
+            const edit = () => {
+                debugger
+            }
+            // const del = () => {
+            //     debugger
+            // }
+            function confirm(e) {
+                console.log(e);
+                message.success('Click on Yes');
+            }
+            function cancel(e) {
+                console.log(e);
+                message.error('Click on No');
+            }
+            return (
+                <span>
+                    <Button type="primary" size="small" onClick={edit}>编辑</Button>
+                    <Divider type="vertical" />
+                    <Popconfirm title="Are you sure delete this task?" onConfirm={confirm} onCancel={cancel} okText="Yes" cancelText="No">
+                        <Button type="danger" size="small">删除</Button>
+                    </Popconfirm>
+                </span>
+            )
+        },
     },
 ]

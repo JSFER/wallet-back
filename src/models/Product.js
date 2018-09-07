@@ -1,4 +1,6 @@
 import ApiService from '@src/utils/ApiService'
+import cloneDeep from 'lodash/cloneDeep'
+import remove from 'lodash/remove'
 
 const Product = {
     state: {
@@ -37,6 +39,30 @@ const Product = {
                         current,
                     },
                 })
+            }
+        },
+        async deleteItemAction(
+            { id, cb },
+            {
+                Product: { products, total, current },
+            },
+        ) {
+            const nProducts = cloneDeep(products)
+            const res = await ApiService.get(`/api/product/delete/${id}`)
+
+            if (res.code === 0) {
+                remove(nProducts, ['id', id])
+
+                dispatch({
+                    type: 'Product/updateProduct',
+                    payload: {
+                        products: nProducts,
+                        total: total - 1,
+                        current,
+                    },
+                })
+
+                cb()
             }
         },
     }),

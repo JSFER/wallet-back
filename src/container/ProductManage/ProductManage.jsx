@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row, Col, Form, Input, Select, Button, Table } from 'antd'
 import { connect } from 'react-redux'
-import columns from './columns'
+import columnsGenerator from './columns'
 
 // style
 import './ProductManage.css'
@@ -40,8 +40,9 @@ export default class ProductManage extends React.Component {
         })
     }
     render() {
-        const { products, current, size, total } = this.props
+        const { products, current, size, total, dispatch } = this.props
         const { getFieldDecorator } = this.props.form
+        const columns = columnsGenerator(dispatch)
         const formItemLayout = {
             labelCol: {
                 span: 6,

@@ -2,6 +2,7 @@
   "name": "wallet-back",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@icedesign/base": "^0.2.5",
     "@icedesign/form-binder": "^0.1.9",
@@ -63,7 +64,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "publish": "scp -r build/* xuxuejian@118.24.97.52:/usr/local/nginx/html/back"
   },
   "jest": {
     "collectCoverageFrom": [

@@ -1,6 +1,7 @@
 import ApiService from '@src/utils/ApiService'
 import cloneDeep from 'lodash/cloneDeep'
 import remove from 'lodash/remove'
+import find from 'lodash/find'
 
 const Product = {
     state: {
@@ -58,6 +59,32 @@ const Product = {
                     payload: {
                         products: nProducts,
                         total: total - 1,
+                        current,
+                    },
+                })
+
+                cb()
+            }
+        },
+        async updateItemAction(
+            { id, params, cb },
+            {
+                Product: { products, total, current },
+            },
+        ) {
+            const nProducts = cloneDeep(products)
+            const res = await ApiService.post(`/api/product/update/${id}`, params)
+
+            if (res.code === 0) {
+                const item = find(nProducts, ['id', id])
+
+                Object.assign(item, params)
+
+                dispatch({
+                    type: 'Product/updateProduct',
+                    payload: {
+                        products: nProducts,
+                        total,
                         current,
                     },
                 })

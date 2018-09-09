@@ -1,18 +1,18 @@
 import React from 'react'
-import { Divider, Button, notification, Modal } from 'antd'
+import { Divider, Button } from 'antd'
 
-export default function columnsGenerator(dispatch) {
+export default function columnsGenerator(handleDelete, handleEdit) {
     return [
         {
             title: '产品名称',
             dataIndex: 'name',
             key: 'name',
         },
-        {
-            title: '产品类型',
-            dataIndex: 'type',
-            key: 'type',
-        },
+        // {
+        //     title: '产品类型',
+        //     dataIndex: 'type',
+        //     key: 'type',
+        // },
         {
             title: '状态',
             dataIndex: 'status',
@@ -55,31 +55,19 @@ export default function columnsGenerator(dispatch) {
             key: 'action',
             render: row => (
                 <span>
-                    <Button type="primary">编辑</Button>
+                    <Button
+                        type="primary"
+                        onClick={() => {
+                            handleEdit(row.id)
+                        }}
+                    >
+                        编辑
+                    </Button>
                     <Divider type="vertical" />
                     <Button
                         type="danger"
                         onClick={() => {
-                            Modal.confirm({
-                                title: '确认删除',
-                                content: '确认要删除吗？',
-                                okText: '确认',
-                                cancelText: '取消',
-                                onOk: () => {
-                                    dispatch({
-                                        type: 'Product/deleteItemAction',
-                                        payload: {
-                                            id: row.id,
-                                            cb: () => {
-                                                notification.info({
-                                                    message: '提示',
-                                                    description: '删除成功！',
-                                                })
-                                            },
-                                        },
-                                    })
-                                },
-                            })
+                            handleDelete(row.id)
                         }}
                     >
                         删除

@@ -1,10 +1,14 @@
 import React from 'react'
-import { Row, Col, Form, Input, Select, Button, Table } from 'antd'
+import { Row, Col, Form, Input, Select, Button, Table, Modal, notification } from 'antd'
 import { connect } from 'react-redux'
-import columnsGenerator from './columns'
+import find from 'lodash/find'
 
 // style
 import './ProductManage.css'
+
+// components
+import Edit from './Edit'
+import columnsGenerator from './columns'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -14,6 +18,11 @@ const Option = Select.Option
 }))
 @Form.create()
 export default class ProductManage extends React.Component {
+    editModalRef = null
+    state = {
+        editModalVisible: false,
+        currentProduct: null,
+    }
     componentDidMount() {
         this.props.dispatch({
             type: 'Product/queryProductsAction',
@@ -25,8 +34,53 @@ export default class ProductManage extends React.Component {
             },
         })
     }
-    handleSubmit = e => {
+    handleEditSubmit = values => {
+        this.props.dispatch({
+            type: 'Product/updateItemAction',
+            payload: {
+                id: this.state.currentProduct.id,
+                params: values,
+                cb: () => {
+                    notification.info({
+                        message: '提示',
+                        description: '更新成功！',
+                    })
+                },
+            },
+        })
+    }
+    handleQuerySubmit = e => {
         e.preventDefault()
+    }
+    handleItemDelete = id => {
+        Modal.confirm({
+            title: '确认删除',
+            content: '确认要删除吗？',
+            okText: '确认',
+            cancelText: '取消',
+            onOk: () => {
+                this.props.dispatch({
+                    type: 'Product/deleteItemAction',
+                    payload: {
+                        id,
+                        cb: () => {
+                            notification.info({
+                                message: '提示',
+                                description: '删除成功！',
+                            })
+                        },
+                    },
+                })
+            },
+        })
+    }
+    handleItemEdit = id => {
+        const item = find(this.props.products, ['id', id])
+
+        this.setState({
+            editModalVisible: true,
+            currentProduct: item,
+        })
     }
     handlePageChage = next => {
         this.props.dispatch({
@@ -40,9 +94,9 @@ export default class ProductManage extends React.Component {
         })
     }
     render() {
-        const { products, current, size, total, dispatch } = this.props
+        const { products, current, size, total } = this.props
         const { getFieldDecorator } = this.props.form
-        const columns = columnsGenerator(dispatch)
+        const columns = columnsGenerator(this.handleItemDelete, this.handleItemEdit)
         const formItemLayout = {
             labelCol: {
                 span: 6,
@@ -54,7 +108,7 @@ export default class ProductManage extends React.Component {
 
         return (
             <div className="page-product-manage">
-                <Form onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.handleQuerySubmit}>
                     <Row gutter={16}>
                         <Col span={8}>
                             <FormItem {...formItemLayout} label="产品名称">
@@ -114,6 +168,36 @@ export default class ProductManage extends React.Component {
                         }}
                     />
                 </div>
+                <Modal
+                    width={800}
+                    visible={this.state.editModalVisible}
+                    title={'产品编辑'}
+                    onOk={() => {
+                        const form = this.editModalRef.getForm()
+
+                        form.validateFields((err, values) => {
+                            if (!err) {
+                                this.handleEditSubmit(values)
+                                form.resetFields()
+                                this.setState({
+                                    editModalVisible: false,
+                                })
+                            }
+                        })
+                    }}
+                    onCancel={() => {
+                        this.setState({
+                            editModalVisible: false,
+                        })
+                    }}
+                >
+                    <Edit
+                        ref={ref => {
+                            this.editModalRef = ref
+                        }}
+                        {...this.state.currentProduct}
+                    />
+                </Modal>
             </div>
         )
     }

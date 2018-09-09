@@ -29,7 +29,8 @@
         "no-confusing-arrow": [0],
         "no-debugger": [1],
         "linebreak-style": [0],
-        "arrow-body-style": [0]
+        "arrow-body-style": [0],
+        "react/sort-comp": [0]
     },
     "parserOptions": {
         "ecmaVersion": 7,

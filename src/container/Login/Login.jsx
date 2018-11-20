@@ -13,7 +13,7 @@ import './Login.css'
 // import { runInDebugContext } from 'vm';
 // import 'antd/dist/antd.css';
 const { Row, Col } = Grid
-const backgroundImage = '//pdxzogn6s.bkt.clouddn.com/background.png'
+const backgroundImage = '//phpiewuht.bkt.clouddn.com/background.png'
 
 @withRouter
 @connect()
@@ -88,7 +88,7 @@ export default class UserLogin extends Component {
                 />
                 <div style={styles.contentWrapper} className="content-wrapper">
                     <h2 style={styles.slogan} className="slogan">
-                        欢迎使用 <br /> 群楚科技后台管理系统
+                        欢迎使用 <br /> 面包后台管理系统
                     </h2>
                     <div style={styles.formContainer}>
                         <h4 style={styles.formTitle}>登录</h4>

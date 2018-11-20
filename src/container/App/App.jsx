@@ -16,7 +16,7 @@ import ProductGroup from '@src/container/ProductGroup/ProductGroup'
 import './App.css'
 
 class App extends Component {
-    renderHome = () => <div className="welcome">欢迎使用群楚后台管理系统</div>
+    renderHome = () => <div className="welcome">欢迎使用面包后台管理系统</div>
     render() {
         return (
             <div className="page-app">

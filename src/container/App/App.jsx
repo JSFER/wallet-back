@@ -9,8 +9,6 @@ import BreadcrumbCustom from '@src/components/Breadcrumb/Breadcrumb'
 // pages
 import PageManage from '@src/container/PageManage/PageManage'
 import ProductManage from '@src/container/ProductManage/ProductManage'
-import ProductAdd from '@src/container/ProductAdd/ProductAdd'
-import ProductGroup from '@src/container/ProductGroup/ProductGroup'
 
 // style
 import './App.css'
@@ -28,8 +26,6 @@ class App extends Component {
                     <BreadcrumbCustom />
                     <Route exact path="/" render={this.renderHome} />
                     <Route exact path="/product" component={ProductManage} />
-                    <Route exact path="/product/add" component={ProductAdd} />
-                    <Route exact path="/product/group" component={ProductGroup} />
                     <Route exact path="/page" component={PageManage} />
                 </div>
             </div>

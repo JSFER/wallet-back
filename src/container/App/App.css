@@ -15,5 +15,9 @@
         height: calc(100% - 48px);
         margin-left: 240px;
         padding: 0 10px 10px 10px;
+
+        & .welcome{
+            margin-left: 50px;
+        }
     }
 }

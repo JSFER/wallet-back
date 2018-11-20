@@ -66,7 +66,7 @@ export default class UserLogin extends Component {
                           })
                         },
                         errorCb : () =>{
-                            this.setState({showSpin:false})
+                            this.setState({showSpin: false})
                         }
                     },
                 })

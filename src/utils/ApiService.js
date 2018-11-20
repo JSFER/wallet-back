@@ -23,13 +23,6 @@ axios.interceptors.response.use(
     res => {
         const { data } = res
 
-        if (data.code !== 0) {
-            notification.error({
-                message: '提示',
-                description: data.message,
-            })
-        }
-
         return data
     },
     () => {

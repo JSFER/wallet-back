@@ -17,7 +17,7 @@ const App = {
         async userLoginAction({ username, password, cb = noop, errorCb = noop }) {
             const res = await ApiService.post('/backend/login', { userName: username, password })
 
-            if (res.rtnCode === 200) {
+            if (res.code === 200) {
                 dispatch({
                     type: 'App/updateLoginStatus',
                     payload: {

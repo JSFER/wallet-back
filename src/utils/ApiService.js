@@ -23,7 +23,10 @@ axios.interceptors.response.use(
     res => {
         const { data } = res
 
-        return data
+        return {
+            code: data.rtnCode,
+            ...data,
+        }
     },
     () => {
         notification.error({

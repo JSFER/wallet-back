@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
 // store
-import store from '@src/store/store'
+import { store } from '@src/store/store'
 
 // pages
 import App from '@src/container/App/App'

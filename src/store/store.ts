@@ -1,10 +1,12 @@
 import { init } from '@rematch/core'
 import App from '@src/models/App'
 
-const store = init({
+export const store = init({
     models: {
         App,
     },
 })
 
-export default store
+
+export type Store = typeof store
+export type Dispatch = typeof store.dispatch

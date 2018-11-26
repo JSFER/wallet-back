@@ -122,6 +122,10 @@
   dependencies:
     redux "4.0.0"
 
+"@types/lodash@^4.14.118":
+  version "4.14.118"
+  resolved "http://registry.npm.taobao.org/@types/lodash/download/@types/lodash-4.14.118.tgz#247bab39bfcc6d910d4927c6e06cbc70ec376f27"
+
 abab@^1.0.3:
   version "1.0.4"
   resolved "http://registry.npm.taobao.org/abab/download/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -2625,7 +2629,6 @@ enhanced-resolve@^3.4.0:
 enhanced-resolve@^4.0.0:
   version "4.1.0"
   resolved "http://registry.npm.taobao.org/enhanced-resolve/download/enhanced-resolve-4.1.0.tgz#41c7e0bfdfe74ac1ffe1e57ad6a5c6c9f3742a7f"
-  integrity sha1-Qcfgv9/nSsH/4eV61qXGyfN0Kn8=
   dependencies:
     graceful-fs "^4.1.2"
     memory-fs "^0.4.0"
@@ -7291,7 +7294,6 @@ semver-diff@^2.0.0:
 semver@^5.0.1:
   version "5.6.0"
   resolved "http://registry.npm.taobao.org/semver/download/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
-  integrity sha1-fnQlb7qknHWqfHogXMInmcrIAAQ=
 
 send@0.16.2:
   version "0.16.2"
@@ -7801,7 +7803,6 @@ tapable@^0.2.7:
 tapable@^1.0.0:
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/tapable/download/tapable-1.1.0.tgz#0d076a172e3d9ba088fd2272b2668fb8d194b78c"
-  integrity sha1-DQdqFy49m6CI/SJysmaPuNGUt4w=
 
 tar@^4:
   version "4.4.6"
@@ -7930,7 +7931,6 @@ trim-right@^1.0.1:
 ts-loader@^5.3.0:
   version "5.3.0"
   resolved "http://registry.npm.taobao.org/ts-loader/download/ts-loader-5.3.0.tgz#4bac24e57bc5189391ab14987d9898ce53ef5cf7"
-  integrity sha1-S6wk5XvFGJORqxSYfZiYzlPvXPc=
   dependencies:
     chalk "^2.3.0"
     enhanced-resolve "^4.0.0"

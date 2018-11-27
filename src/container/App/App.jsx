@@ -7,6 +7,7 @@ import MenuBar from '@src/components/MenuBar/MenuBar'
 import BreadcrumbCustom from '@src/components/Breadcrumb/Breadcrumb'
 
 // pages
+import Currency from '@src/container/Currency/Currency'
 
 // style
 import './App.css'
@@ -23,6 +24,7 @@ class App extends Component {
                 <div className="main">
                     <BreadcrumbCustom />
                     <Route exact path="/" render={this.renderHome} />
+                    <Route exact path="/basic/exchangeRate" component={Currency} />
                 </div>
             </div>
         )

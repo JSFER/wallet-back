@@ -3,7 +3,7 @@ import noop from 'lodash/noop'
 
 const App = {
     state: {
-        hasLogin: false,
+        hasLogin: true,
         username: undefined,
     },
     reducers: {
@@ -13,7 +13,7 @@ const App = {
             username,
         }),
     },
-    effects: ( dispatch) => ({
+    effects: dispatch => ({
         async userLoginAction({ username, password, cb = noop }) {
             const res = await ApiService.post('/backend/login', { userName: username, password })
 

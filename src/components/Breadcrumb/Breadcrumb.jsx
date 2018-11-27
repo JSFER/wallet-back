@@ -6,10 +6,7 @@ import PropTypes from 'prop-types';
 
 const breadcrumbNameMap = {
     '/': '首页',
-    '/product': '产品管理',
-    '/product/add': '产品录入',
-    '/product/group': '分类管理',
-    '/page': '页面管理',
+    '/basic/exchangeRate': '基础设置 / 币种汇率信息'
 
 };
 export default class BreadcrumbCustom extends Component {

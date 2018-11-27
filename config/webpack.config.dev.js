@@ -103,11 +103,6 @@ module.exports = {
     strictExportPresence: true,
     rules: [
       {
-        test: /\.tsx?$/,
-        include: [paths.appSrc],
-        use: [require.resolve('ts-loader')]
-      },
-      {
         // "oneOf" will traverse all following loaders until one will
         // match the requirements. When no loader matches it will fall
         // back to the "file" loader at the end of the loader list.

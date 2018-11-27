@@ -1,11 +1,5 @@
 import ApiService from '@src/utils/ApiService'
 import noop from 'lodash/noop'
-import { Dispatch } from '@src/store/store'
-
-interface IAppState {
-    hasLogin: boolean
-    username: string
-}
 
 const App = {
     state: {
@@ -13,13 +7,13 @@ const App = {
         username: undefined,
     },
     reducers: {
-        updateLoginStatus: (state: IAppState, { hasLogin, username }: IAppState) => ({
+        updateLoginStatus: (state, { hasLogin, username }) => ({
             ...state,
             hasLogin,
             username,
         }),
     },
-    effects: ( dispatch: Dispatch) => ({
+    effects: ( dispatch) => ({
         async userLoginAction({ username, password, cb = noop }) {
             const res = await ApiService.post('/backend/login', { userName: username, password })
 

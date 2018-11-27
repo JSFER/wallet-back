@@ -6,17 +6,15 @@ import { HOST } from '@src/config'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 axios.interceptors.request.use(config => {
-    const nConfig = config
-
-    Object.assign(nConfig, {
+    Object.assign(config, {
         data: qs.stringify(config.data),
     })
 
     if (process.env.NODE_ENV === 'development') {
-        nConfig.url = HOST + nConfig.url
+        config.url = HOST + config.url
     }
 
-    return nConfig
+    return config
 })
 
 axios.interceptors.response.use(

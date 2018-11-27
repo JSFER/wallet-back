@@ -16,38 +16,35 @@ import cloneDeep from 'lodash/cloneDeep'
     }
  */
 
-export default {
+const Currency = {
     state: {
         currencies: [],
         pageNo: 0,
         pageSize: 20,
     },
     reducers: {
-        updateCurrencies: ( state, { currencies, pageNo } ) => {
+        updateCurrencies: (state, { currencies }) => {
             const nState = cloneDeep(state)
-            
+
             nState.currencies = currencies
-            nState.pageNo = pageNo
 
             return nState
-        }
+        },
     },
-    effects: dispatch => {
-        async function fetchCurrenciesAsync( { nPageNo }, { pageSize }) {
-            const res = ApiService.get('/currency/query/page', {
-                pageIndex: nPageNo,
-                pageSize 
-            })
+    effects: dispatch => ({
+        async fetchCurrenciesAsync({ pageNo }, { Currency: { pageSize } }) {
+            const res = await ApiService.get(`/currency/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`)
 
             if (res.code === 200) {
                 dispatch({
                     type: 'Currency/updateCurrencies',
                     payload: {
-                        currencies: res.data,
-                        pageNo: res.pageNo
-                    }
+                        currencies: res.data.data,
+                    },
                 })
             }
-        }
-    },
+        },
+    }),
 }
+
+export default Currency

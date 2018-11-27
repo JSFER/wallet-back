@@ -1,9 +1,32 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { table } from 'antd'
 
-export default class Currency extends React.Component{
+@connect(
+    state => ({
+        ...state.Currency
+    })
+)
+class Currency extends React.Component{
+    componentDidMount(){
+        const { dispatch } = this.props
+
+        dispatch({
+            type: 'Currency/fetchCurrenciesAsync',
+            payload: {
+                pageNo: 0
+            }
+        })
+    }
     render(){
+        const { currencies } = this.props
+
         return (
-            <div className="page-currency">currency aaaa</div>
+            <div className="page-currency">
+              123
+            </div>
         )
     }
 }
+
+export default Currency

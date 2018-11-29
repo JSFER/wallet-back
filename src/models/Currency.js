@@ -20,19 +20,24 @@ const Currency = {
     state: {
         currencies: [],
         pageNo: 0,
-        pageSize: 20,
+        pageSize: 10,
+        total: 0,
     },
     reducers: {
-        updateCurrencies: (state, { currencies }) => {
+        updateCurrencies: (state, { currencies, total }) => {
             const nState = cloneDeep(state)
 
             nState.currencies = currencies
+            nState.total = total
 
             return nState
         },
     },
     effects: dispatch => ({
-        async fetchCurrenciesAsync({ pageNo }, { Currency: { pageSize } }) {
+        async fetchCurrenciesAsync({ pageNo }, rootState) {
+            const {
+                Currency: { pageSize },
+            } = rootState
             const res = await ApiService.get(`/currency/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`)
 
             if (res.code === 200) {
@@ -40,10 +45,19 @@ const Currency = {
                     type: 'Currency/updateCurrencies',
                     payload: {
                         currencies: res.data.data,
+                        total: res.data.total,
                     },
                 })
             }
         },
+        async addCurrencyAsync({ params, callback}, rootState){
+            const { App: { userId }} = rootState
+            const res = await ApiService.post('/currency/add', Object.assign(params, { userId }))
+
+            if(res.code === 200){
+                callback && callback()
+            }
+        }
     }),
 }
 

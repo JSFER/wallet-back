@@ -4,13 +4,15 @@ import noop from 'lodash/noop'
 const App = {
     state: {
         hasLogin: false,
-        username: undefined,
+        username: '',
+        userId: 0
     },
     reducers: {
-        updateLoginStatus: (state, { hasLogin, username }) => ({
+        updateLoginStatus: (state, { hasLogin, userId, username }) => ({
             ...state,
             hasLogin,
-            username,
+            userId,
+            username
         }),
     },
     effects: dispatch => ({
@@ -22,6 +24,8 @@ const App = {
                     type: 'App/updateLoginStatus',
                     payload: {
                         hasLogin: true,
+                        userId: res.data.userId,
+                        username: res.data.userName
                     },
                 })
 

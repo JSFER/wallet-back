@@ -24,11 +24,12 @@ const Currency = {
         total: 0,
     },
     reducers: {
-        updateCurrencies: (state, { currencies, total }) => {
+        updateCurrencies: (state, { currencies, total, pageNo }) => {
             const nState = cloneDeep(state)
 
             nState.currencies = currencies
             nState.total = total
+            nState.pageNo = pageNo
 
             return nState
         },
@@ -46,6 +47,7 @@ const Currency = {
                     payload: {
                         currencies: res.data.data,
                         total: res.data.total,
+                        pageNo
                     },
                 })
             }

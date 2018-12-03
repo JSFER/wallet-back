@@ -1,16 +1,11 @@
 import axios from 'axios'
 import { notification } from 'antd'
-import qs from 'qs'
 import { HOST } from '@src/config'
 
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 axios.interceptors.request.use(config => {
-    // Object.assign(config, {
-    //     data: qs.stringify(config.data),
-    // })
-
     if (process.env.NODE_ENV === 'development') {
         config.url = HOST + config.url
     }

@@ -59,7 +59,7 @@ class Currency extends React.Component {
         this.props.dispatch({
             type: 'Currency/fetchCurrenciesAsync',
             payload: {
-                pageNo: next,
+                pageNo: next - 1,
             },
         })
     }
@@ -87,7 +87,7 @@ class Currency extends React.Component {
                     columns={columns}
                     dataSource={currencies}
                     pagination={{
-                        current: pageNo,
+                        current: pageNo + 1,
                         pageSize,
                         total,
                         onChange: this.onPagination,

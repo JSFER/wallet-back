@@ -45,15 +45,17 @@ export default class MenuBar extends React.Component {
                         <Menu.Item key="basic/masterContract">主力合约</Menu.Item>
                     </SubMenu>
                     <SubMenu
-                        key="custom"
+                        key="people"
                         title={
                             <span>
                                 <Icon type="profile" />
-                                <span>客户管理</span>
+                                <span>人员管理</span>
                             </span>
                         }
                     >
-                        <Menu.Item key="custom/profile">总览</Menu.Item>
+                        <Menu.Item key="people/profile">总览</Menu.Item>
+                        <Menu.Item key="people/addCustomer">添加客户</Menu.Item>
+                        <Menu.Item key="people/addAgent">添加代理人</Menu.Item>
                     </SubMenu>
                     <SubMenu
                         key="params"

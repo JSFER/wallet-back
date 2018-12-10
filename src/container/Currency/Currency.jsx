@@ -97,6 +97,8 @@ class Currency extends React.Component {
                     width={innerWidth / 2}
                     visible={visible}
                     title={title}
+                    okText='确认'
+                    cancelText='取消'
                     onOk={() => {
                         const form = this.modalRef.getForm()
 

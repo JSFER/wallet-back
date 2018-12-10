@@ -8,6 +8,7 @@ import BreadcrumbCustom from '@src/components/Breadcrumb/Breadcrumb'
 
 // pages
 import Currency from '@src/container/Currency/Currency'
+import PeopleProfile from '@src/container/People/PeopleProfile'
 
 // style
 import './App.css'
@@ -25,6 +26,7 @@ class App extends Component {
                     <BreadcrumbCustom />
                     <Route exact path="/" render={this.renderHome} />
                     <Route exact path="/basic/exchangeRate" component={Currency} />
+                    <Route exact path="/people/profile" component={PeopleProfile} />
                 </div>
             </div>
         )

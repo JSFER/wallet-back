@@ -1,18 +1,18 @@
 import ApiService from '@src/utils/ApiService'
 import cloneDeep from 'lodash/cloneDeep'
 
-const Currency = {
+const Client = {
     state: {
-        currencies: [],
+        clients: [],
         pageNo: 0,
         pageSize: 10,
         total: 0,
     },
     reducers: {
-        updateCurrencies: (state, { currencies, total, pageNo }) => {
+        updateClients: (state, { clients, total, pageNo }) => {
             const nState = cloneDeep(state)
 
-            nState.currencies = currencies.map(c => ({ key: c.id, ...c }))
+            nState.clients = clients.map(c => ({ key: c.id, ...c }))
             nState.total = total
             nState.pageNo = pageNo
 
@@ -20,28 +20,31 @@ const Currency = {
         },
     },
     effects: dispatch => ({
-        async fetchCurrenciesAsync({ pageNo }, rootState) {
+        async fetchClientsAsync({ pageNo }, rootState) {
             const {
-                Currency: { pageSize },
+                Client: { pageSize },
             } = rootState
-            const res = await ApiService.get(`/currency/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`)
+            const res = await ApiService.post(`/client/query/page`, {
+                pageIndex: pageNo,
+                pageSize
+            })
 
             if (res.code === 200) {
                 dispatch({
-                    type: 'Currency/updateCurrencies',
+                    type: 'Client/updateClients',
                     payload: {
-                        currencies: res.data.data,
+                        clients: res.data.data,
                         total: res.data.total,
                         pageNo,
                     },
                 })
             }
         },
-        async addCurrencyAsync({ params, callback }, rootState) {
+        async addClientAsync({ params, callback }, rootState) {
             const {
                 App: { userId },
             } = rootState
-            const res = await ApiService.post('/currency/add', Object.assign(params, { userId }))
+            const res = await ApiService.post('/client/add', Object.assign(params, { userId }))
 
             if (res.code === 200) {
                 callback && callback()
@@ -50,4 +53,4 @@ const Currency = {
     }),
 }
 
-export default Currency
+export default Client

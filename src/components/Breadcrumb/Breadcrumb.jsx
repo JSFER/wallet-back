@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 
 const breadcrumbNameMap = {
     '/': '首页',
-    '/basic/exchangeRate': '基础设置 / 币种汇率信息'
-
+    '/basic/exchangeRate': '基础设置 / 币种汇率信息',
+    '/people/profile': '人员管理 / 总览'
 };
 export default class BreadcrumbCustom extends Component {
     static contextTypes = {

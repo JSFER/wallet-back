@@ -24,10 +24,7 @@ const Client = {
             const {
                 Client: { pageSize },
             } = rootState
-            const res = await ApiService.post(`/client/query/page`, {
-                pageIndex: pageNo,
-                pageSize
-            })
+            const res = await ApiService.post(`/client/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, {})
 
             if (res.code === 200) {
                 dispatch({

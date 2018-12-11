@@ -13,7 +13,7 @@ import './Login.css'
 // import { runInDebugContext } from 'vm';
 // import 'antd/dist/antd.css';
 const { Row, Col } = Grid
-const backgroundImage = '//phpiewuht.bkt.clouddn.com/background.png'
+const backgroundImage = '//images.unsplash.com/photo-1498049860654-af1a5c566876?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'
 
 @withRouter
 @connect()

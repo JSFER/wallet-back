@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react'
 import { Input, Button, Grid } from '@icedesign/base'
-import { notification,Spin, Icon } from 'antd'
+import { notification, Spin, Icon } from 'antd'
 import { withRouter } from 'react-router-dom'
 import {
     FormBinderWrapper as IceFormBinderWrapper,
@@ -13,7 +13,8 @@ import './Login.css'
 // import { runInDebugContext } from 'vm';
 // import 'antd/dist/antd.css';
 const { Row, Col } = Grid
-const backgroundImage = '//images.unsplash.com/photo-1498049860654-af1a5c566876?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'
+const backgroundImage =
+    '//images.unsplash.com/photo-1498049860654-af1a5c566876?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'
 
 @withRouter
 @connect()
@@ -29,7 +30,7 @@ export default class UserLogin extends Component {
                 username: 'admin',
                 password: 'admin',
             },
-            showSpin:false,
+            showSpin: false,
         }
     }
 
@@ -43,41 +44,40 @@ export default class UserLogin extends Component {
         e.preventDefault()
 
         const { dispatch, history } = this.props
-        if(!this.state.showSpin){
-            this.setState({showSpin:true})
+        if (!this.state.showSpin) {
+            this.setState({ showSpin: true })
             this.refs.form.validateAll((errors, values) => {
                 if (errors) {
                     console.log('errors', errors)
                     return
                 }
-    
+
                 dispatch({
                     type: 'App/userLoginAction',
                     payload: {
                         ...values,
-                        cb : () => {
-                          this.setState({showSpin:false})
-                          notification.info({
-                            message: '登陆成功！',
-                            duration: .5,
-                            onClose: () => {
-                              history.push('/')
-                            }
-                          })
+                        cb: () => {
+                            this.setState({ showSpin: false })
+                            notification.info({
+                                message: '登陆成功！',
+                                duration: 0.5,
+                                onClose: () => {
+                                    history.push('/')
+                                },
+                            })
                         },
-                        errorCb : () =>{
-                            this.setState({showSpin: false})
-                        }
+                        errorCb: () => {
+                            this.setState({ showSpin: false })
+                        },
                     },
                 })
             })
         }
-
     }
 
     render() {
-        const { showSpin }  = this.state
-        const antIcon = <Icon type="loading" style={{ fontSize: 24, color:'rgb(85,85,85)' }} spin />;
+        const { showSpin } = this.state
+        const antIcon = <Icon type="loading" style={{ fontSize: 18, color: '#fff' }} spin />
         return (
             <div style={styles.userLogin} className="user-login">
                 <div
@@ -119,8 +119,13 @@ export default class UserLogin extends Component {
                                 </Row>
 
                                 <Row style={styles.formItem}>
-                                    <Button type="primary" onClick={this.handleSubmit} style={showSpin?styles.submitLoadingBtn:styles.submitBtn}>
-                                        登 录{showSpin && ' 中...'}{showSpin && <Spin indicator={antIcon}/>}
+                                    <Button
+                                        type="primary"
+                                        onClick={this.handleSubmit}
+                                        style={showSpin ? styles.submitLoadingBtn : styles.submitBtn}
+                                    >
+                                        登 录{showSpin && ' 中...'}
+                                        {showSpin && <Spin indicator={antIcon} />}
                                     </Button>
                                 </Row>
 
@@ -190,7 +195,7 @@ const styles = {
         width: '240px',
         background: '#3080fe',
         borderRadius: '28px',
-        color: 'rgb(85,85,85)',
+        color: '#fff',
     },
     checkbox: {
         marginLeft: '5px',

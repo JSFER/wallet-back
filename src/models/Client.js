@@ -20,11 +20,16 @@ const Client = {
         },
     },
     effects: dispatch => ({
-        async fetchClientsAsync({ pageNo }, rootState) {
+        async fetchClientsAsync({ pageNo = 0, params = {} }, rootState) {
             const {
                 Client: { pageSize },
             } = rootState
-            const res = await ApiService.post(`/api/client/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, {})
+            const { clientId, agentId, groupId } = params
+            const res = await ApiService.post(`/api/client/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, {
+                clientIdNo: clientId,
+                clientGroupId: groupId,
+                clientAgentId: agentId
+            })
 
             if (res.code === 200) {
                 dispatch({

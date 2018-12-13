@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { notification } from 'antd'
-import { HOST } from '@src/config'
 
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 axios.defaults.headers.post['Content-Type'] = 'application/json'

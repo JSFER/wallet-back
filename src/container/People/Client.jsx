@@ -41,7 +41,6 @@ class Client extends React.Component {
                     pageNo,
                     params: values,
                 })
-                this.props.form.resetFields()
             }
         })
     }

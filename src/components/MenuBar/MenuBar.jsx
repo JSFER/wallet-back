@@ -68,6 +68,23 @@ export default class MenuBar extends React.Component {
                     >
                         <Menu.Item key="params/profile">总览</Menu.Item>
                     </SubMenu>
+                    <SubMenu
+                        key="transaction"
+                        title={
+                            <span>
+                                <Icon type="red-envelope" />
+                                <span>交易查询</span>
+                            </span>
+                        }
+                    >
+                        <Menu.Item key="transaction/query">交易查询</Menu.Item>
+                        <Menu.Item key="transaction/entrust">委托信息</Menu.Item>
+                        <Menu.Item key="transaction/deal">成交信息</Menu.Item>
+                        <Menu.Item key="transaction/hold">持仓信息</Menu.Item>
+                        <Menu.Item key="transaction/history-entrust">历史委托</Menu.Item>
+                        <Menu.Item key="transaction/history-deal">历史成交</Menu.Item>
+                        <Menu.Item key="transaction/history-hold">历史持仓</Menu.Item>
+                    </SubMenu>
                 </Menu>
             </div>
         )

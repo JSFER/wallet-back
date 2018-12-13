@@ -2,8 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 // modules
-import { Table, Modal, Row, Col, Button, Form } from 'antd'
+import { Table, Input, Row, Col, Button, Form } from 'antd'
 import columns from './clientColumns'
+ 
+const FormItem = Form.Item
 
 @Form.create()
 @connect(state => ({
@@ -45,6 +47,7 @@ class Client extends React.Component {
     }
     render() {
         const { Client } = this.props
+        const { getFieldDecorator } = this.props.form
         const { clients, pageNo, pageSize, total } = Client
         const { clientId, agentId, groupId } = this.state
         const formItemLayout = {

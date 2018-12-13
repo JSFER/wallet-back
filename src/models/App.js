@@ -18,7 +18,7 @@ const App = {
     effects: dispatch => ({
         async userLoginAction({ username, password, cb = noop }) {
             const res = await ApiService({
-                url: '/backend/login',
+                url: '/api/backend/login',
                 method: 'post',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 params: {

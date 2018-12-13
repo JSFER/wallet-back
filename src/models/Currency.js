@@ -24,7 +24,7 @@ const Currency = {
             const {
                 Currency: { pageSize },
             } = rootState
-            const res = await ApiService.get(`/currency/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`)
+            const res = await ApiService.get(`/api/currency/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`)
 
             if (res.code === 200) {
                 dispatch({
@@ -41,7 +41,7 @@ const Currency = {
             const {
                 App: { userId },
             } = rootState
-            const res = await ApiService.post('/currency/add', Object.assign(params, { userId }))
+            const res = await ApiService.post('/api/currency/add', Object.assign(params, { userId }))
 
             if (res.code === 200) {
                 callback && callback()

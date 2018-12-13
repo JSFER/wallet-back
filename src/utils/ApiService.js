@@ -6,10 +6,6 @@ import { HOST } from '@src/config'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 axios.interceptors.request.use(config => {
-    if (process.env.NODE_ENV === 'development') {
-        config.url = HOST + config.url
-    }
-
     return config
 })
 

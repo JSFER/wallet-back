@@ -59,7 +59,7 @@ class Client extends React.Component {
             },
         }
         return (
-            <div className="page-client">
+            <div style={{paddingTop: 20}}>
                 <Row>
                     <Col span={8}>
                         <FormItem {...formItemLayout} label="客户ID">

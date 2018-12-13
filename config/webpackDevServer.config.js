@@ -80,7 +80,12 @@ module.exports = function(proxy, allowedHost) {
       disableDotRule: true,
     },
     public: allowedHost,
-    proxy,
+    proxy: {
+      '/api': {
+        target: 'http://116.62.130.69:8080',
+        pathRewrite: {'^/api' : ''}
+      }
+    },
     before(app) {
       // This lets us open files from the runtime error overlay.
       app.use(errorOverlayMiddleware());

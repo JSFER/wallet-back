@@ -24,7 +24,7 @@ const Client = {
             const {
                 Client: { pageSize },
             } = rootState
-            const res = await ApiService.post(`/client/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, {})
+            const res = await ApiService.post(`/api/client/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, {})
 
             if (res.code === 200) {
                 dispatch({
@@ -41,7 +41,7 @@ const Client = {
             const {
                 App: { userId },
             } = rootState
-            const res = await ApiService.post('/client/add', Object.assign(params, { userId }))
+            const res = await ApiService.post('/api/client/add', Object.assign(params, { userId }))
 
             if (res.code === 200) {
                 callback && callback()

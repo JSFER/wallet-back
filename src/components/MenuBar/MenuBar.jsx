@@ -55,7 +55,6 @@ export default class MenuBar extends React.Component {
                     >
                         <Menu.Item key="people/client">客户管理</Menu.Item>
                         <Menu.Item key="people/agent">代理人管理</Menu.Item>
-                        <Menu.Item key="people/group">分组管理</Menu.Item>
                     </SubMenu>
                     <SubMenu
                         key="params"

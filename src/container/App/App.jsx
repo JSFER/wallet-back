@@ -10,7 +10,6 @@ import BreadcrumbCustom from '@src/components/Breadcrumb/Breadcrumb'
 import Currency from '@src/container/Currency/Currency'
 import Client from '@src/container/People/Client'
 import Agent from '@src/container/People/Agent'
-import Group from '@src/container/People/Group'
 
 // style
 import './App.css'
@@ -30,7 +29,6 @@ class App extends Component {
                     <Route exact path="/basic/exchangeRate" component={Currency} />
                     <Route exact path="/people/client" component={Client} />
                     <Route exact path="/people/agent" component={Agent} />
-                    <Route exact path="/people/group" component={Group} />
                 </div>
             </div>
         )

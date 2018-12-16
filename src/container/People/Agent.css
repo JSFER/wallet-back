@@ -32,5 +32,50 @@
             color: #000000a6;
             border-bottom: #d9d9d9 solid 1px;
         }
+
+        & .items{
+            & .item{
+                display: flex;
+                height: 30px;
+                padding-left: 20px;
+                align-items: center;
+                color: #000000a6;
+                cursor: pointer;
+                transition: all 0.2s;
+
+                & .name{
+                    flex-grow: 1;
+                    font-size: 13px;
+                }
+
+                & .button{
+                    display: none;
+                    flex-basis: 60px;
+
+                    & .ant-btn-background-ghost{
+                        font-size: 13px;
+                        border: none;
+                    }
+                }
+            }
+
+            & .item.active{
+                background: rgba(0,0,0,.1);
+
+                & .button{
+                    display: block;
+                }
+            }
+        }
+
+        & .items.groups{
+            & .item:hover{
+                background: rgba(0,0,0,0.1);
+
+                & .button{
+                    display: block;
+                }
+            }
+        }
     }
 }

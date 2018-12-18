@@ -7,9 +7,11 @@ import MenuBar from '@src/components/MenuBar/MenuBar'
 import BreadcrumbCustom from '@src/components/Breadcrumb/Breadcrumb'
 
 // pages
-import Currency from '@src/container/Currency/Currency'
-import Client from '@src/container/People/Client'
-import Agent from '@src/container/People/Agent'
+import Currency from '@src/container/Basic/Currency/Currency'
+import Client from '@src/container/People/Client/Client'
+import Agent from '@src/container/People/Agent/Agent'
+import InsureMoney from '@src/container/Params/InsureMoney'
+import VarietyInfo from '@src/container/Basic/VarietyInfo/VarietyInfo'
 
 // style
 import './App.css'
@@ -27,8 +29,10 @@ class App extends Component {
                     <BreadcrumbCustom />
                     <Route exact path="/" render={this.renderHome} />
                     <Route exact path="/basic/exchangeRate" component={Currency} />
+                    <Route exact path="/basic/varietyInfo" component={VarietyInfo} />
                     <Route exact path="/people/client" component={Client} />
                     <Route exact path="/people/agent" component={Agent} />
+                    <Route exact path="/params/insureMoney" component={InsureMoney} />
                 </div>
             </div>
         )

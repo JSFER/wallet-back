@@ -40,7 +40,7 @@ export default class MenuBar extends React.Component {
                     >
                         <Menu.Item key="basic/exchangeRate">币种汇率信息</Menu.Item>
                         <Menu.Item key="basic/marketInfo">市场信息</Menu.Item>
-                        <Menu.Item key="basic/typeInfo">品种信息</Menu.Item>
+                        <Menu.Item key="basic/varietyInfo">品种信息</Menu.Item>
                         <Menu.Item key="basic/contractInfo">合约信息</Menu.Item>
                         <Menu.Item key="basic/masterContract">主力合约</Menu.Item>
                     </SubMenu>
@@ -65,7 +65,7 @@ export default class MenuBar extends React.Component {
                             </span>
                         }
                     >
-                        <Menu.Item key="params/profile">总览</Menu.Item>
+                        <Menu.Item key="params/insureMoney">保证金模板信息</Menu.Item>
                     </SubMenu>
                     <SubMenu
                         key="transaction"

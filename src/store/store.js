@@ -5,6 +5,8 @@ import Client from '@src/models/Client'
 import Agent from '@src/models/Agent'
 import Variety from '@src/models/Variety'
 
+import Query from '@src/models/Transacation/Query'
+
 const store = init({
     models: {
         App,
@@ -12,6 +14,7 @@ const store = init({
         Client,
         Agent,
         Variety,
+        Query
     },
 })
 

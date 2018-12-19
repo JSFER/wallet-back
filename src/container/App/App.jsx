@@ -12,6 +12,14 @@ import Client from '@src/container/People/Client/Client'
 import Agent from '@src/container/People/Agent/Agent'
 import InsureMoney from '@src/container/Params/InsureMoney'
 import VarietyInfo from '@src/container/Basic/VarietyInfo/VarietyInfo'
+// pages -- 交易查询
+import Query from '@src/container/Transaction/Query/Query'
+import Deal from '@src/container/Transaction/Deal/Deal'
+import Entrust from '@src/container/Transaction/Entrust/Entrust'
+import Hold from '@src/container/Transaction/Hold/Hold'
+import Historydeal from '@src/container/Transaction/history-deal/history-deal'
+import Historyentrust from '@src/container/Transaction/history-entrust/history-entrust'
+import HistoryHold from '@src/container/Transaction/history-hold/history-hold'
 
 // style
 import './App.css'
@@ -33,6 +41,15 @@ class App extends Component {
                     <Route exact path="/people/client" component={Client} />
                     <Route exact path="/people/agent" component={Agent} />
                     <Route exact path="/params/insureMoney" component={InsureMoney} />
+
+                    {/* 交易查询 */}
+                    <Route exact path="/transaction/query" component={Query} />
+                    <Route exact path="/transaction/deal" component={Deal} />
+                    <Route exact path="/transaction/entrust" component={Entrust} />
+                    <Route exact path="/transaction/hold" component={Hold} />
+                    <Route exact path="/transaction/history-deal" component={Historydeal} />
+                    <Route exact path="/transaction/history-entrust" component={Historyentrust} />
+                    <Route exact path="/transaction/history-hold" component={HistoryHold} />
                 </div>
             </div>
         )

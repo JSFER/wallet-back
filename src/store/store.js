@@ -6,6 +6,8 @@ import Agent from '@src/models/Agent'
 import Variety from '@src/models/Variety'
 
 import Query from '@src/models/Transacation/Query'
+import Hold from '@src/models/Transacation/Hold'
+import Entrust from '@src/models/Transacation/Entrust'
 
 const store = init({
     models: {
@@ -14,7 +16,10 @@ const store = init({
         Client,
         Agent,
         Variety,
-        Query
+        
+        Query,
+        Hold,
+        Entrust
     },
 })
 

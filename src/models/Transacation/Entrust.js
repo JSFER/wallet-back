@@ -1,19 +1,18 @@
 import ApiService from '@src/utils/ApiService'
 import cloneDeep from 'lodash/cloneDeep'
-import { root } from 'postcss';
 
-const Query = {
+const Entrust = {
     state: {
-        querys: [],
+        entrusts: [],
         pageNo: 0,
         pageSize: 10,
         total: 0,
     },
     reducers: {
-        updateQuerys: (state, { querys, total, pageNo }) => {
+        updateEntrusts: (state, { entrusts, total, pageNo }) => {
             const nState = cloneDeep(state)
 
-            nState.querys = querys.map(c => ({ key: c.id, ...c }))
+            nState.entrusts = entrusts.map(c => ({ key: c.id, ...c }))
             nState.total = total
             nState.pageNo = pageNo
 
@@ -21,20 +20,20 @@ const Query = {
         },
     },
     effects: dispatch => ({
-        async fetchQuerysAsync({ pageNo = 0, params = {} }, rootState) {
+        async fetchEntrustsAsync({ pageNo = 0, params = {} }, rootState) {
             const {
-                Query: { pageSize },
+                Entrust: { pageSize },
             } = rootState
             const { clientNo } = params
-            const res = await ApiService.post(`/api/trans/match/query?pageIndex=${pageNo}&pageSize=${pageSize}`, {
+            const res = await ApiService.post(`/api/trans/order/query?pageIndex=${pageNo}&pageSize=${pageSize}`, {
                 clientNo
             })
 
             if (res.code === 200) {
                 dispatch({
-                    type: 'Query/updateQuerys',
+                    type: 'Entrust/updateEntrusts',
                     payload: {
-                        querys: res.data,
+                        entrusts: res.data,
                         // total: res.data.total,
                         pageNo,
                     },
@@ -44,4 +43,4 @@ const Query = {
     }),
 }
 
-export default Query
+export default Entrust

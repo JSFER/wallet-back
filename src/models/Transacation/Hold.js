@@ -1,19 +1,18 @@
 import ApiService from '@src/utils/ApiService'
 import cloneDeep from 'lodash/cloneDeep'
-import { root } from 'postcss';
 
-const Query = {
+const Hold = {
     state: {
-        querys: [],
+        holds: [],
         pageNo: 0,
         pageSize: 10,
         total: 0,
     },
     reducers: {
-        updateQuerys: (state, { querys, total, pageNo }) => {
+        updateHolds: (state, { holds, total, pageNo }) => {
             const nState = cloneDeep(state)
 
-            nState.querys = querys.map(c => ({ key: c.id, ...c }))
+            nState.holds = holds.map(c => ({ key: c.id, ...c }))
             nState.total = total
             nState.pageNo = pageNo
 
@@ -21,20 +20,20 @@ const Query = {
         },
     },
     effects: dispatch => ({
-        async fetchQuerysAsync({ pageNo = 0, params = {} }, rootState) {
+        async fetchHoldsAsync({ pageNo = 0, params = {} }, rootState) {
             const {
-                Query: { pageSize },
+                Hold: { pageSize },
             } = rootState
             const { clientNo } = params
-            const res = await ApiService.post(`/api/trans/match/query?pageIndex=${pageNo}&pageSize=${pageSize}`, {
+            const res = await ApiService.post(`/api/trans/hold/query?pageIndex=${pageNo}&pageSize=${pageSize}`, {
                 clientNo
             })
 
             if (res.code === 200) {
                 dispatch({
-                    type: 'Query/updateQuerys',
+                    type: 'Hold/updateHolds',
                     payload: {
-                        querys: res.data,
+                        holds: res.data,
                         // total: res.data.total,
                         pageNo,
                     },
@@ -44,4 +43,4 @@ const Query = {
     }),
 }
 
-export default Query
+export default Hold

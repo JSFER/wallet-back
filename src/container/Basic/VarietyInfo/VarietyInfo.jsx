@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import pick from 'lodash/pick'
+import omit from 'lodash/omit'
 
 // modules
 import { Table, Modal, Row, Col, Button, notification } from 'antd'
@@ -9,14 +9,14 @@ import Edit from './Edit'
 import columns from './columns'
 
 @connect(state => ({
-    ...state.Currency,
+    ...state.Variety,
 }))
 class VarietyInfo extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            currency: {},
+            variety: {},
             action: 'add',
             visible: false,
         }
@@ -25,21 +25,18 @@ class VarietyInfo extends React.Component {
         const { dispatch } = this.props
 
         dispatch({
-            type: 'Currency/fetchCurrenciesAsync',
+            type: 'Variety/fetchVarietiesAsync',
             payload: {
                 pageNo: 0,
             },
         })
     }
     handleSubmit = values => {
-        const params = pick(values, ['currencyNo', 'currencyName', 'exchangeRate'])
-
-        params.status = values.isBase ? 'Y' : 'N'
-
+        console.log(values);
         this.props.dispatch({
-            type: 'Currency/addCurrencyAsync',
+            type: 'Variety/addVarietyAsync',
             payload: {
-                params,
+                params: values,
                 callback: () => {
                     notification.info({
                         message: '提示',
@@ -52,28 +49,28 @@ class VarietyInfo extends React.Component {
     handleAdd = () => {
         this.setState({
             visible: true,
-            currency: {},
+            variety: {},
         })
     }
     onPagination = next => {
         this.props.dispatch({
-            type: 'Currency/fetchCurrenciesAsync',
+            type: 'Variety/fetchVarietiesAsync',
             payload: {
                 pageNo: next - 1,
             },
         })
     }
     render() {
-        const { currencies, pageNo, pageSize, total } = this.props
-        const { action, currency, visible } = this.state
-        const title = action === 'add' ? '添加货币' : '编辑货币'
+        const { varieties, pageNo, pageSize, total } = this.props
+        const { action, variety, visible } = this.state
+        const title = action === 'add' ? '添加品种' : '编辑品种'
 
         return (
-            <div className="page-currency">
+            <div className="page-variety">
                 <Row>
                     <Col span={24} style={{ textAlign: 'right' }}>
                         <Button type="primary" onClick={this.handleAdd}>
-                            添加货币
+                            添加品种
                         </Button>
                     </Col>
                 </Row>
@@ -85,7 +82,7 @@ class VarietyInfo extends React.Component {
                         },
                     }}
                     columns={columns}
-                    dataSource={currencies}
+                    dataSource={varieties}
                     pagination={{
                         current: pageNo + 1,
                         pageSize,
@@ -94,7 +91,7 @@ class VarietyInfo extends React.Component {
                     }}
                 />
                 <Modal
-                    width={innerWidth / 2}
+                    width={innerWidth / 3 * 2}
                     visible={visible}
                     title={title}
                     okText='确认'
@@ -122,7 +119,7 @@ class VarietyInfo extends React.Component {
                         ref={ref => {
                             this.modalRef = ref
                         }}
-                        {...currency}
+                        {...variety}
                     />
                 </Modal>
             </div>

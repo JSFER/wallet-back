@@ -5,9 +5,9 @@ import Client from '@src/models/Client'
 import Agent from '@src/models/Agent'
 import Variety from '@src/models/Variety'
 
-import Query from '@src/models/Transacation/Query'
-import Hold from '@src/models/Transacation/Hold'
-import Entrust from '@src/models/Transacation/Entrust'
+import Query from '@src/models/Transaction/Query'
+import Hold from '@src/models/Transaction/Hold'
+import Entrust from '@src/models/Transaction/Entrust'
 
 const store = init({
     models: {

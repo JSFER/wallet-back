@@ -30,7 +30,7 @@ const Variety = {
                 dispatch({
                     type: 'Variety/updateVarieties',
                     payload: {
-                        clients: res.data.data,
+                        varieties: res.data.data,
                         total: res.data.total,
                         pageNo,
                     },
@@ -41,7 +41,7 @@ const Variety = {
             const {
                 App: { userId },
             } = rootState
-            const res = await ApiService.post('/commodity/add', Object.assign(params, { userId }))
+            const res = await ApiService.post('/api/commodity/add', Object.assign(params, { userId }))
 
             if (res.code === 200) {
                 callback && callback()

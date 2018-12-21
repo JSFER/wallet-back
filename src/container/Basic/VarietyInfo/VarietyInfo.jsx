@@ -22,6 +22,9 @@ class VarietyInfo extends React.Component {
         }
     }
     componentDidMount() {
+        this.fetch()
+    }
+    fetch = () => {
         const { dispatch } = this.props
 
         dispatch({
@@ -32,7 +35,6 @@ class VarietyInfo extends React.Component {
         })
     }
     handleSubmit = values => {
-        console.log(values);
         this.props.dispatch({
             type: 'Variety/addVarietyAsync',
             payload: {
@@ -42,6 +44,7 @@ class VarietyInfo extends React.Component {
                         message: '提示',
                         description: '添加成功',
                     })
+                    this.fetch()
                 },
             },
         })

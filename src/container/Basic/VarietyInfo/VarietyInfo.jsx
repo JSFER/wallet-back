@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import omit from 'lodash/omit'
 
 // modules
 import { Table, Modal, Row, Col, Button, notification } from 'antd'
@@ -12,14 +11,10 @@ import columns from './columns'
     ...state.Variety,
 }))
 class VarietyInfo extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            variety: {},
-            action: 'add',
-            visible: false,
-        }
+    state = {
+        variety: {},
+        action: 'add',
+        visible: false,
     }
     componentDidMount() {
         this.fetch()
@@ -79,11 +74,6 @@ class VarietyInfo extends React.Component {
                 </Row>
                 <Table
                     style={{ marginTop: 20 }}
-                    rowSelection={{
-                        onChange: (selectedRowKeys, selectedRows) => {
-                            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
-                        },
-                    }}
                     columns={columns}
                     dataSource={varieties}
                     pagination={{

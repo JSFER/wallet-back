@@ -4,6 +4,7 @@ import Currency from '@src/models/Currency'
 import Client from '@src/models/Client'
 import Agent from '@src/models/Agent'
 import Variety from '@src/models/Variety'
+import Template from '@src/models/Template'
 
 import Query from '@src/models/Transaction/Query'
 import Hold from '@src/models/Transaction/Hold'
@@ -16,6 +17,7 @@ const store = init({
         Client,
         Agent,
         Variety,
+        Template,
         
         Query,
         Hold,

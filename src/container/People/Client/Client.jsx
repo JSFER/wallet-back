@@ -91,11 +91,6 @@ class Client extends React.Component {
                 </Row>
                 <Table
                     style={{ marginTop: 20 }}
-                    rowSelection={{
-                        onChange: (selectedRowKeys, selectedRows) => {
-                            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
-                        },
-                    }}
                     columns={columns}
                     dataSource={clients}
                     pagination={{

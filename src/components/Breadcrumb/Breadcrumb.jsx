@@ -9,9 +9,9 @@ const breadcrumbNameMap = {
     '/params/insureMoney': '参数信息 / 保证金信息',
 
     // 交易查询
-    '/transaction/query': '交易查询 / 交易查询',
+    '/transaction/query': '交易查询 / 成交信息',
     '/transaction/entrust': '交易查询 / 委托信息',
-    '/transaction/deal': '交易查询 / 成交信息',
+    // '/transaction/deal': '交易查询 / 成交信息',
     '/transaction/hold': '交易查询 / 持仓信息',
     '/transaction/history-entrust': '交易查询 / 历史委托',
     '/transaction/history-deal': '交易查询 / 历史成交',

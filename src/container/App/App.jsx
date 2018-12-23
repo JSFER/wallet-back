@@ -44,7 +44,7 @@ class App extends Component {
 
                     {/* 交易查询 */}
                     <Route exact path="/transaction/query" component={Query} />
-                    <Route exact path="/transaction/deal" component={Deal} />
+                    {/* <Route exact path="/transaction/deal" component={Deal} /> */}
                     <Route exact path="/transaction/entrust" component={Entrust} />
                     <Route exact path="/transaction/hold" component={Hold} />
                     <Route exact path="/transaction/history-deal" component={Historydeal} />

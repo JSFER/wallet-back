@@ -76,9 +76,9 @@ export default class MenuBar extends React.Component {
                             </span>
                         }
                     >
-                        <Menu.Item key="transaction/query">交易查询</Menu.Item>
+                        <Menu.Item key="transaction/query">成交信息</Menu.Item>
                         <Menu.Item key="transaction/entrust">委托信息</Menu.Item>
-                        <Menu.Item key="transaction/deal">成交信息</Menu.Item>
+                        {/* <Menu.Item key="transaction/deal">成交信息</Menu.Item> */}
                         <Menu.Item key="transaction/hold">持仓信息</Menu.Item>
                         <Menu.Item key="transaction/history-entrust">历史委托</Menu.Item>
                         <Menu.Item key="transaction/history-deal">历史成交</Menu.Item>

@@ -12,6 +12,7 @@ import Client from '@src/container/People/Client/Client'
 import Agent from '@src/container/People/Agent/Agent'
 import InsureMoney from '@src/container/Params/InsureMoney'
 import VarietyInfo from '@src/container/Basic/VarietyInfo/VarietyInfo'
+import Poundage from '@src/container/Params/Poundage'
 // pages -- 交易查询
 import Query from '@src/container/Transaction/Query/Query'
 import Deal from '@src/container/Transaction/Deal/Deal'
@@ -41,6 +42,7 @@ class App extends Component {
                     <Route exact path="/people/client" component={Client} />
                     <Route exact path="/people/agent" component={Agent} />
                     <Route exact path="/params/insureMoney" component={InsureMoney} />
+                    <Route exact path="/params/poundage" component={Poundage} />
 
                     {/* 交易查询 */}
                     <Route exact path="/transaction/query" component={Query} />

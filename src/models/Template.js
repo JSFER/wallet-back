@@ -9,68 +9,83 @@ const Template = {
             pageSize: 10,
             total: 0,
         },
-        money: {
-            moneys: [],
+        detail: {
+            details: [],
             pageNo: 0,
             pageSize: 10,
             total: 0,
         },
+        poundage: {
+            templates: [],
+            pageNo: 0,
+            pageSize: 10,
+            total: 0,
+        }
     },
     reducers: {
-        updateInsureTemplates: (state, { templates, total, pageNo }) => {
+        updateTemplates: (state, { templates, total, pageNo, type }) => {
             const nState = cloneDeep(state)
+            const key = type === 0 ? 'insure' : 'poundage'
 
-            nState.insure.templates = templates.map(t => ({ key: t.id, ...t }))
-            nState.insure.total = total
-            nState.insure.pageNo = pageNo
+            nState[key].templates = templates.map(t => ({ key: t.id, ...t }))
+            nState[key].total = total
+            nState[key].pageNo = pageNo
 
             return nState
         },
-        updateInsureMoneys: (state, { moneys, total, pageNo }) => {
+        updateDetails: (state, { details, total, pageNo }) => {
             const nState = cloneDeep(state)
 
-            nState.money.moneys = moneys.map(m => ({ key: m.id, ...m }))
-            nState.money.total = total
-            nState.money.pageNo = pageNo
+            nState.detail.details = details.map(m => ({ key: m.id, ...m }))
+            nState.detail.total = total
+            nState.detail.pageNo = pageNo
 
             return nState
         },
     },
     effects: dispatch => ({
-        async fetchInsureTemplatesAsync({ pageNo = 0, params = {} }, rootState) {
+        async fetchTemplatesAsync({ pageNo = 0, type, params = {} }, rootState) {
             const { pageSize } = rootState.Template.insure
             const res = await ApiService.get(
-                `/api/feeTemplate/query/page?pageIndex=${pageNo}&pageSize=${pageSize}&type=0`,
+                `/api/feeTemplate/query/page?pageIndex=${pageNo}&pageSize=${pageSize}&type=${type}`,
             )
 
             if (res.code === 200) {
                 dispatch({
-                    type: 'Template/updateInsureTemplates',
+                    type: 'Template/updateTemplates',
                     payload: {
                         templates: res.data.data,
                         total: res.data.total,
                         pageNo,
+                        type
                     },
                 })
             }
         },
-        async fetchInsureMoneysAsync({ id, pageNo = 0, params = {}, callback }, rootState) {
-            const { pageSize } = rootState.Template.money
+        async fetchDetailsAsync({ id, pageNo = 0, params = {} }, rootState) {
+            const { pageSize } = rootState.Template.detail
             const res = await ApiService.get(
                 `/api/feeTemplate/commodity／query/page?feeTemplateId=${id}&pageIndex=${pageNo}&pageSize=${pageSize}`,
             )
 
             if (res.code === 200) {
                 dispatch({
-                    type: 'Template/updateInsureMoneys',
+                    type: 'Template/updateDetails',
                     payload: {
-                        moneys: res.data.data,
+                        details: res.data.data,
                         total: res.data.total,
                         pageNo,
                     },
                 })
             }
         },
+        async addTemplateAsync({params, callback}){
+            const res = await ApiService.post(`/api/feeTemplate/add`, params)
+
+            if(res.code === 200){
+                callback && callback()
+            }
+        }
     }),
 }
 

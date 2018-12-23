@@ -66,6 +66,7 @@ export default class MenuBar extends React.Component {
                         }
                     >
                         <Menu.Item key="params/insureMoney">保证金模板信息</Menu.Item>
+                        <Menu.Item key="params/poundage">手续费模板信息</Menu.Item>
                     </SubMenu>
                     <SubMenu
                         key="transaction"

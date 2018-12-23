@@ -8,11 +8,11 @@ import forIn from 'lodash/forIn'
 import find from 'lodash/find'
 
 @connect(state => ({
-    insure: state.Template.insure,
+    poundage: state.Template.poundage,
     varieties: state.Variety.varieties,
     detail: state.Template.detail
 }))
-class InsureMoney extends React.Component {
+class Poundage extends React.Component {
     state = {
         detailVisible: false,
         editVisible: false,
@@ -25,7 +25,7 @@ class InsureMoney extends React.Component {
             type: 'Template/fetchTemplatesAsync',
             payload: {
                 pageNo: 0,
-                type: 0
+                type: 1
             },
         })
     }
@@ -54,7 +54,7 @@ class InsureMoney extends React.Component {
         const params = {
             feeTemplateName: values.feeTemplateName,
             remark: values.remark,
-            type: 0,
+            type: 1,
             feeTemplateCommodityList: feeList
         }
 
@@ -74,10 +74,10 @@ class InsureMoney extends React.Component {
         })
     }
     render() {
-        const { templates, pageNo, pageSize, total } = this.props.insure
+        const { templates, pageNo, pageSize, total } = this.props.poundage
 
         return (
-            <div className="page-insure-money">
+            <div>
                 <Row>
                     <Col span={24} style={{ textAlign: 'right' }}>
                         <Button type="primary" onClick={this.onAdd}>
@@ -147,4 +147,4 @@ class InsureMoney extends React.Component {
     }
 }
 
-export default InsureMoney
+export default Poundage

@@ -84,7 +84,7 @@ class VarietyInfo extends React.Component {
                     }}
                 />
                 <Modal
-                    width={innerWidth / 3 * 2}
+                    width={innerWidth * 0.8}
                     visible={visible}
                     title={title}
                     okText='确认'

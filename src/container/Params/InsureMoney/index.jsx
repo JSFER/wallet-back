@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Row, Col, Button, Table, Modal } from 'antd'
 import { templateColumns } from './columns'
-import Money from './Money'
+import Detail from './Detail'
+import Edit from './Edit'
 
 @connect(state => ({
     insure: state.Template.insure,
@@ -11,6 +12,7 @@ import Money from './Money'
 class InsureMoney extends React.Component {
     state = {
         detailVisible: false,
+        editVisible: false,
     }
     componentDidMount() {
         this.fetch()
@@ -24,6 +26,12 @@ class InsureMoney extends React.Component {
         })
     }
     onPagination = () => {}
+    onAdd = () => {
+        this.setState({
+            editVisible: true,
+        })
+    }
+    handleSubmit = () => {}
     render() {
         const { templates, pageNo, pageSize, total } = this.props.insure
 
@@ -31,7 +39,9 @@ class InsureMoney extends React.Component {
             <div className="page-insure-money">
                 <Row>
                     <Col span={24} style={{ textAlign: 'right' }}>
-                        <Button type="primary">添加模板</Button>
+                        <Button type="primary" onClick={this.onAdd}>
+                            添加模板
+                        </Button>
                     </Col>
                 </Row>
                 <Table
@@ -61,7 +71,35 @@ class InsureMoney extends React.Component {
                     okText="确定"
                     cancelText="取消"
                 >
-                    <Money {...this.props.money} />
+                    <Detail {...this.props.money} />
+                </Modal>
+                <Modal
+                    visible={this.state.editVisible}
+                    width={innerWidth * 0.6}
+                    onCancel={() => {
+                        this.setState({
+                            editVisible: false,
+                        })
+                    }}
+                    onOk={() => {
+                        const form = this.editRef.getForm()
+
+                        form.validateFields((err, values) => {
+                            if (!err) {
+                                this.handleSubmit(values)
+                                form.resetFields()
+                                this.setState({
+                                    visible: false,
+                                })
+                            }
+                        })
+                    }}
+                >
+                    <Edit
+                        ref={ref => {
+                            this.editRef = ref
+                        }}
+                    />
                 </Modal>
             </div>
         )

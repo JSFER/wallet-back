@@ -2,7 +2,7 @@ import React from 'react'
 import { Table } from 'antd'
 import { detailColumns } from './columns'
 
-class Money extends React.Component {
+class Detail extends React.Component {
     onPagination = () => {}
     render() {
         const { moneys, pageNo, pageSize, total } = this.props
@@ -23,4 +23,4 @@ class Money extends React.Component {
     }
 }
 
-export default Money
+export default Detail

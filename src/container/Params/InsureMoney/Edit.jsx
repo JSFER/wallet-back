@@ -2,6 +2,7 @@ import React from 'react'
 import { Transfer, Row, Col, Input, Form } from 'antd'
 import { connect } from 'react-redux'
 import get from 'lodash/get'
+import find from 'lodash/find'
 
 const FormItem = Form.Item
 
@@ -49,6 +50,7 @@ class Edit extends React.Component {
                 span: 10,
             },
         }
+        console.log('targetKeys:', targetKeys);
 
         return (
             <div>
@@ -70,7 +72,7 @@ class Edit extends React.Component {
                     </Col>
                 </Row>
                 <Row type="flex">
-                    <Col offset={1} span={15}>
+                    <Col offset={1} span={13}>
                         <Transfer
                             dataSource={varieties}
                             targetKeys={targetKeys}
@@ -81,9 +83,9 @@ class Edit extends React.Component {
                             onChange={this.handleChange}
                         />
                     </Col>
-                    <Col span={8}>
+                    <Col span={10}>
                         {targetKeys.map(tk => (
-                            <FormItem key={tk} {...{labelCol: {span: 8}, wrapperCol: {span: 16}}} label={`${get(varieties, `[${tk}].commodityName`)}的费率`}>
+                            <FormItem key={tk} {...{labelCol: {span: 14}, wrapperCol: {span: 10}}} label={`${find(varieties, v => v.id === tk).commodityName}的费率`}>
                                 {getFieldDecorator(`fee_${tk}`, {
                                     rules: [{ required: true, message: '费率不能为空' }],
                                 })(

@@ -31,7 +31,9 @@ class InsureMoney extends React.Component {
             editVisible: true,
         })
     }
-    handleSubmit = () => {}
+    handleSubmit = (values) => {
+        console.log(values);
+    }
     render() {
         const { templates, pageNo, pageSize, total } = this.props.insure
 
@@ -89,7 +91,7 @@ class InsureMoney extends React.Component {
                                 this.handleSubmit(values)
                                 form.resetFields()
                                 this.setState({
-                                    visible: false,
+                                    editVisible: false,
                                 })
                             }
                         })

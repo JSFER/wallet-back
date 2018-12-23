@@ -84,6 +84,21 @@ export default class MenuBar extends React.Component {
                         <Menu.Item key="transaction/history-deal">历史成交</Menu.Item>
                         <Menu.Item key="transaction/history-hold">历史持仓</Menu.Item>
                     </SubMenu>
+                    <SubMenu
+                        key="Funding"
+                        title={
+                            <span>
+                                <Icon type="pay-circle" />
+                                <span>资金管理</span>
+                            </span>
+                        }
+                    >
+                        <Menu.Item key="funding/inAndOut">出入金列表</Menu.Item>
+                        <Menu.Item key="funding/history">历史资金记录</Menu.Item>
+                        <Menu.Item key="funding/nAndOutHistory">历史出入金记录</Menu.Item>
+                        <Menu.Item key="funding/creditList">授信资金列表</Menu.Item>
+                        <Menu.Item key="funding/historyCreditList">历史授信资金列表</Menu.Item>
+                    </SubMenu>
                 </Menu>
             </div>
         )

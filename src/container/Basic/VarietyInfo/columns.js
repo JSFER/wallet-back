@@ -95,7 +95,9 @@ export default instance => [
                                                         message: '提示',
                                                         description: '删除成功',
                                                     })
-                                                    instance.fetch()
+                                                    instance.fetch({
+                                                        pageNo: 0
+                                                    })
                                                 },
                                             },
                                         })

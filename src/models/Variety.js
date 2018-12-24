@@ -24,7 +24,7 @@ const Variety = {
             const {
                 Variety: { pageSize },
             } = rootState
-            const res = await ApiService.post(`/api/commodity/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, {})
+            const res = await ApiService.post(`/api/commodity/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, params)
 
             if (res.code === 200) {
                 dispatch({

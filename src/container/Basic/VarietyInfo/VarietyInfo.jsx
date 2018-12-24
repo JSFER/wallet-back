@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 // modules
-import { Table, Modal, Row, Col, Button, notification } from 'antd'
+import { Table, Modal, Row, Col, Button, notification, Form, Input } from 'antd'
 import Edit from './Edit'
 
 import columns from './columns'
@@ -17,16 +17,16 @@ class VarietyInfo extends React.Component {
         visible: false,
     }
     componentDidMount() {
-        this.fetch()
+        this.fetch({
+            pageNo: 0
+        })
     }
-    fetch = () => {
+    fetch = (payload) => {
         const { dispatch } = this.props
 
         dispatch({
             type: 'Variety/fetchVarietiesAsync',
-            payload: {
-                pageNo: 0,
-            },
+            payload
         })
     }
     handleSubmit = (values, action) => {
@@ -42,7 +42,9 @@ class VarietyInfo extends React.Component {
                         message: '提示',
                         description: action === 'add' ? '添加' : '更新' + '成功',
                     })
-                    this.fetch()
+                    this.fetch({
+                        pageNo: 0
+                    })
                 },
             },
         })
@@ -51,7 +53,7 @@ class VarietyInfo extends React.Component {
         this.setState({
             visible: true,
             variety: {},
-            action: 'add'
+            action: 'add',
         })
     }
     onPagination = next => {
@@ -62,6 +64,15 @@ class VarietyInfo extends React.Component {
             },
         })
     }
+    onQuery = () => {
+        this.fetch({
+            pageNo: this.props.pageNo,
+            params: {
+                exchangeNo: this.exchangeNoInput.input.value,
+                currencyNo: this.currencyNoInput.input.value
+            }
+        })
+    }
     render() {
         const { varieties, pageNo, pageSize, total } = this.props
         const { action, variety, visible } = this.state
@@ -69,6 +80,21 @@ class VarietyInfo extends React.Component {
 
         return (
             <div className="page-variety">
+                <Row>
+                    <Col span={10}>
+                        <Form.Item label="市场编号" {...{ wrapperCol: { span: 16 }, labelCol: { span: 8 } }}>
+                            <Input ref={ref => (this.exchangeNoInput = ref)} type="text" />
+                        </Form.Item>
+                    </Col>
+                    <Col span={10}>
+                        <Form.Item label="品种编号" {...{ wrapperCol: { span: 16 }, labelCol: { span: 8 } }}>
+                            <Input ref={ref => (this.currencyNoInput = ref)} type="text" />
+                        </Form.Item>
+                    </Col>
+                    <Col span={4} style={{textAlign: 'right', paddingTop: 4}}>
+                        <Button type="primary" onClick={this.onQuery}>查询</Button>
+                    </Col>
+                </Row>
                 <Row>
                     <Col span={24} style={{ textAlign: 'right' }}>
                         <Button type="primary" onClick={this.handleAdd}>

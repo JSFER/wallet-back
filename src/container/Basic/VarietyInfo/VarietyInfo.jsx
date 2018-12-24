@@ -29,15 +29,18 @@ class VarietyInfo extends React.Component {
             },
         })
     }
-    handleSubmit = values => {
+    handleSubmit = (values, action) => {
+        const actionName = action === 'add' ? 'addVarietyAsync' : 'updateVarietyAsync'
+
         this.props.dispatch({
-            type: 'Variety/addVarietyAsync',
+            type: 'Variety/' + actionName,
             payload: {
+                id: this.state.variety.id,
                 params: values,
                 callback: () => {
                     notification.info({
                         message: '提示',
-                        description: '添加成功',
+                        description: action === 'add' ? '添加' : '更新' + '成功',
                     })
                     this.fetch()
                 },
@@ -48,6 +51,7 @@ class VarietyInfo extends React.Component {
         this.setState({
             visible: true,
             variety: {},
+            action: 'add'
         })
     }
     onPagination = next => {
@@ -74,7 +78,7 @@ class VarietyInfo extends React.Component {
                 </Row>
                 <Table
                     style={{ marginTop: 20 }}
-                    columns={columns}
+                    columns={columns(this)}
                     dataSource={varieties}
                     pagination={{
                         current: pageNo + 1,
@@ -87,14 +91,14 @@ class VarietyInfo extends React.Component {
                     width={innerWidth * 0.8}
                     visible={visible}
                     title={title}
-                    okText='确认'
-                    cancelText='取消'
+                    okText="确认"
+                    cancelText="取消"
                     onOk={() => {
                         const form = this.modalRef.getForm()
 
                         form.validateFields((err, values) => {
                             if (!err) {
-                                this.handleSubmit(values)
+                                this.handleSubmit(values, action)
                                 form.resetFields()
                                 this.setState({
                                     visible: false,

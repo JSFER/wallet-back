@@ -47,6 +47,27 @@ const Variety = {
                 callback && callback()
             }
         },
+        async fetchVarietyAsync({ id, callback }) {
+            const res = await ApiService.get(`/api/commodity/update/query/${id}`)
+
+            if (res.code === 200) {
+                callback && callback(res.data)
+            }
+        },
+        async updateVarietyAsync({ id, params, callback }) {
+            const res = await ApiService.put(`/api/commodity/update/${id}`, params)
+
+            if (res.code === 200) {
+                callback && callback()
+            }
+        },
+        async deleteVarietyAsync({ id, callback }) {
+            const res = await ApiService.delete(`/api/commodity/delete/${id}`)
+
+            if (res.code === 200) {
+                callback && callback()
+            }
+        },
     }),
 }
 

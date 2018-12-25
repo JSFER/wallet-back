@@ -24,9 +24,11 @@ const Historyentrust = {
             const {
                 Historyentrust: { pageSize },
             } = rootState
-            const { clientNo } = params
+            const { clientNo, startDate, endDate } = params
             const res = await ApiService.post(`/api/trans/history/order/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, {
-                clientNo
+                clientNo,
+                startDate,
+                endDate
             })
 
             if (res.code === 200) {

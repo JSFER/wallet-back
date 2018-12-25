@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export default [
     {
         title: '客户编号',
@@ -13,11 +15,14 @@ export default [
         title: '创建时间',
         dataIndex: 'createTime',
         key: 'createTime',
+        render: data => {
+            return moment(data).format('YYYY-MM-DD HH:mm:ss')
+        },
     },
     {
-        title: '匹配时间',
-        dataIndex: 'matchTime',
-        key: 'matchTime',
+        title: '资本',
+        dataIndex: 'capital',
+        key: 'capital',
     },
     {
         title: '交易',
@@ -28,18 +33,18 @@ export default [
         // },
     },
     {
-        title: '金额',
-        dataIndex: 'matchPrice',
-        key: 'matchPrice',
+        title: '当前金额',
+        dataIndex: 'currencyNo',
+        key: 'currencyNo',
     },
     {
-        title: '风险报单',
-        dataIndex: 'riskOrderEnum.text',
-        key: 'riskOrderEnum.text',
+        title: '浮动利润',
+        dataIndex: 'floatProfit',
+        key: 'floatProfit',
     },
     {
-        title: '2',
-        dataIndex: 'clientRegistDate',
-        key: 'clientRegistDate',
+        title: '基金',
+        dataIndex: 'frozenFund',
+        key: 'frozenFund',
     },
 ]

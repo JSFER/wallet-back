@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export default [
     {
         title: '客户编号',
@@ -5,41 +7,29 @@ export default [
         key: 'clientNo',
     },
     {
-        title: '商品编号',
-        dataIndex: 'commodityNo',
-        key: 'commodityNo',
+        title: '修改金额',
+        dataIndex: 'changeMoney',
+        key: 'changeMoney',
     },
     {
-        title: '创建时间',
-        dataIndex: 'createTime',
-        key: 'createTime',
+        title: '修改时间',
+        dataIndex: 'changeTime',
+        key: 'changeTime',
+        render: data => {
+            return moment(data).format('YYYY-MM-DD HH:mm:ss')
+        },
     },
     {
-        title: '匹配时间',
-        dataIndex: 'matchTime',
-        key: 'matchTime',
+        title: '备注',
+        dataIndex: 'remark',
+        key: 'remark',
     },
     {
-        title: '交易',
-        dataIndex: 'directEnum.text',
-        key: 'directEnum.text',
+        title: '出入列举',
+        dataIndex: 'outInModeEnum.text',
+        key: 'outInModeEnum.text',
         // render: data => {
         //     return statusMap[data.code]
         // },
-    },
-    {
-        title: '金额',
-        dataIndex: 'matchPrice',
-        key: 'matchPrice',
-    },
-    {
-        title: '风险报单',
-        dataIndex: 'riskOrderEnum.text',
-        key: 'riskOrderEnum.text',
-    },
-    {
-        title: '2',
-        dataIndex: 'clientRegistDate',
-        key: 'clientRegistDate',
-    },
+    }
 ]

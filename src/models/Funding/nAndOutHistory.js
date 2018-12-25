@@ -1,18 +1,18 @@
 import ApiService from '@src/utils/ApiService'
 import cloneDeep from 'lodash/cloneDeep'
 
-const nAndOutHistory = {
+export default {
     state: {
-        clients: [],
+        nAndOutHistorys: [],
         pageNo: 0,
         pageSize: 10,
         total: 0,
     },
     reducers: {
-        updateClients: (state, { clients, total, pageNo }) => {
+        updatenAndOutHistorys: (state, { nAndOutHistorys, total, pageNo }) => {
             const nState = cloneDeep(state)
 
-            nState.clients = clients.map(c => ({ key: c.id, ...c }))
+            nState.nAndOutHistorys = nAndOutHistorys.map(c => ({ key: c.id, ...c }))
             nState.total = total
             nState.pageNo = pageNo
 
@@ -20,39 +20,27 @@ const nAndOutHistory = {
         },
     },
     effects: dispatch => ({
-        async fetchDealsAsync({ pageNo = 0, params = {} }, rootState) {
+        async fetchnAndOutHistorysAsync({ pageNo = 0, params = {} }, rootState) {
             const {
-                Client: { pageSize },
+                NAndOutHistory: { pageSize },
             } = rootState
-            const { clientId, agentId, groupId } = params
-            const res = await ApiService.post(`/api/client/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, {
-                clientIdNo: clientId,
-                clientGroupId: groupId,
-                clientAgentId: agentId
+            const { clientNo, startDate, endDate } = params
+            const res = await ApiService.post(`/api/fund/out/in/history/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, {
+                clientNo,
+                startDate,
+                endDate
             })
 
             if (res.code === 200) {
                 dispatch({
-                    type: 'Client/updateClients',
+                    type: 'NAndOutHistory/updatenAndOutHistorys',
                     payload: {
-                        clients: res.data.data,
+                        nAndOutHistorys: res.data && res.data.data?res.data.data: res.data,
                         total: res.data.total,
                         pageNo,
                     },
                 })
             }
-        },
-        async addClientAsync({ params, callback }, rootState) {
-            const {
-                App: { userId },
-            } = rootState
-            const res = await ApiService.post('/api/client/add', Object.assign(params, { userId }))
-
-            if (res.code === 200) {
-                callback && callback()
-            }
-        },
+        }
     }),
 }
-
-export default nAndOutHistory

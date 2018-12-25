@@ -1,4 +1,3 @@
-// /fund/out/in/history/query/page   历史出入金
 import React from 'react'
 import { connect } from 'react-redux'
 
@@ -10,9 +9,9 @@ const FormItem = Form.Item
 
 @Form.create()
 @connect(state => ({
-    Access: state.Access,
+    NAndOutHistory: state.NAndOutHistory,
 }))
-export default class Access extends React.Component {
+export default class NAndOutHistory extends React.Component {
     state = {
         pageNo: '',
         startDate: undefined,
@@ -25,7 +24,7 @@ export default class Access extends React.Component {
     }
     fetch = payload => {
         this.props.dispatch({
-            type: 'Access/fetchAccessAsync',
+            type: 'NAndOutHistory/fetchnAndOutHistorysAsync',
             payload,
         })
     }
@@ -47,9 +46,9 @@ export default class Access extends React.Component {
         })
     }
     render() {
-        const { Access } = this.props
+        const { NAndOutHistory } = this.props
         const { getFieldDecorator } = this.props.form
-        const { Hentrusts, pageNo, pageSize, total } = Access
+        const { nAndOutHistorys, pageNo, pageSize, total } = NAndOutHistory
         const { clientNo, startDate, endDate } = this.state
         const formItemLayout = {
             labelCol: {
@@ -104,7 +103,7 @@ export default class Access extends React.Component {
                 <Table
                     style={{ marginTop: 20 }}
                     columns={columns}
-                    dataSource={Hentrusts}
+                    dataSource={nAndOutHistorys}
                     pagination={{
                         current: pageNo + 1,
                         pageSize,

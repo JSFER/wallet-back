@@ -24,9 +24,11 @@ const Historydeal = {
             const {
                 Historydeal: { pageSize },
             } = rootState
-            const { clientNo } = params
+            const { clientNo, startDate, endDate  } = params
             const res = await ApiService.post(`/api/trans/history/match/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, {
-                clientNo
+                clientNo,
+                startDate,
+                endDate
             })
 
             if (res.code === 200) {

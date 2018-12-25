@@ -1,18 +1,18 @@
 import ApiService from '@src/utils/ApiService'
 import cloneDeep from 'lodash/cloneDeep'
 
-const inAndout = {
+export default {
     state: {
-        clients: [],
+        InAndouts: [],
         pageNo: 0,
         pageSize: 10,
         total: 0,
     },
     reducers: {
-        updateClients: (state, { clients, total, pageNo }) => {
+        updateInAndouts: (state, { InAndouts, total, pageNo }) => {
             const nState = cloneDeep(state)
 
-            nState.clients = clients.map(c => ({ key: c.id, ...c }))
+            nState.InAndouts = InAndouts.map(c => ({ key: c.id, ...c }))
             nState.total = total
             nState.pageNo = pageNo
 
@@ -20,39 +20,24 @@ const inAndout = {
         },
     },
     effects: dispatch => ({
-        async fetchDealsAsync({ pageNo = 0, params = {} }, rootState) {
+        async fetchInAndoutAsync({ pageNo = 0, params = {} }, rootState) {
             const {
-                Client: { pageSize },
+                InAndout: { pageSize },
             } = rootState
-            const { clientId, agentId, groupId } = params
-            const res = await ApiService.post(`/api/client/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, {
-                clientIdNo: clientId,
-                clientGroupId: groupId,
-                clientAgentId: agentId
+            const { clientNo } = params
+            const res = await ApiService.post(`/api/fund/out/in/query?pageIndex=${pageNo}&pageSize=${pageSize}`, {
+                clientNo
             })
-
             if (res.code === 200) {
                 dispatch({
-                    type: 'Client/updateClients',
+                    type: 'InAndout/updateInAndouts',
                     payload: {
-                        clients: res.data.data,
+                        InAndouts: res.data && res.data.data?res.data.data: res.data,
                         total: res.data.total,
                         pageNo,
                     },
                 })
             }
-        },
-        async addClientAsync({ params, callback }, rootState) {
-            const {
-                App: { userId },
-            } = rootState
-            const res = await ApiService.post('/api/client/add', Object.assign(params, { userId }))
-
-            if (res.code === 200) {
-                callback && callback()
-            }
-        },
+        }
     }),
 }
-
-export default inAndout

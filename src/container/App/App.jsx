@@ -22,6 +22,11 @@ import Historydeal from '@src/container/Transaction/history-deal/history-deal'
 import Historyentrust from '@src/container/Transaction/history-entrust/history-entrust'
 import HistoryHold from '@src/container/Transaction/history-hold/history-hold'
 
+// 资金
+import History from '@src/container/Funding/history/history'
+import InAndout from '@src/container/Funding/inAndout/inAndout'
+import NAndOutHistory from '@src/container/Funding/nAndOutHistory/nAndOutHistory'
+
 // style
 import './App.css'
 
@@ -54,9 +59,9 @@ class App extends Component {
                     <Route exact path="/transaction/history-hold" component={HistoryHold} />
 
                     {/* 资金 */}
-                    <Route exact path="/funding/inAndOut" component={() => import('@src/container/Funding/inAndout/inAndout')} />
-                    <Route exact path="/funding/nAndOutHistory" component={() => import('@src/container/Funding/nAndOutHistory/nAndOutHistory')} />
-                    <Route exact path="/funding/history" component={() => import('@src/container/Funding/history/history')} />
+                    <Route exact path="/funding/inAndOut" component={InAndout} />
+                    <Route exact path="/funding/nAndOutHistory" component={NAndOutHistory} />
+                    <Route exact path="/funding/history" component={History} />
                 </div>
             </div>
         )

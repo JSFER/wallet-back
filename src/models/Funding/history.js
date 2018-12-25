@@ -1,18 +1,18 @@
 import ApiService from '@src/utils/ApiService'
 import cloneDeep from 'lodash/cloneDeep'
 
-const history = {
+export default {
     state: {
-        clients: [],
+        Historys: [],
         pageNo: 0,
         pageSize: 10,
         total: 0,
     },
     reducers: {
-        updateClients: (state, { clients, total, pageNo }) => {
+        updateHistorys: (state, { Historys, total, pageNo }) => {
             const nState = cloneDeep(state)
 
-            nState.clients = clients.map(c => ({ key: c.id, ...c }))
+            nState.Historys = Historys.map(c => ({ key: c.id, ...c }))
             nState.total = total
             nState.pageNo = pageNo
 
@@ -20,39 +20,37 @@ const history = {
         },
     },
     effects: dispatch => ({
-        async fetchDealsAsync({ pageNo = 0, params = {} }, rootState) {
+        async fetchHistoryAsync({ pageNo = 0, params = {} }, rootState) {
             const {
-                Client: { pageSize },
+                History: { pageSize },
             } = rootState
-            const { clientId, agentId, groupId } = params
-            const res = await ApiService.post(`/api/client/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, {
-                clientIdNo: clientId,
-                clientGroupId: groupId,
-                clientAgentId: agentId
+            const { clientNo, startDate, endDate } = params
+            const res = await ApiService.post(`/api/fund/history/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, {
+                clientNo,
+                startDate,
+                endDate
             })
 
             if (res.code === 200) {
                 dispatch({
-                    type: 'Client/updateClients',
+                    type: 'History/updateHistorys',
                     payload: {
-                        clients: res.data.data,
+                        Historys: res.data && res.data.data?res.data.data: res.data,
                         total: res.data.total,
                         pageNo,
                     },
                 })
             }
         },
-        async addClientAsync({ params, callback }, rootState) {
-            const {
-                App: { userId },
-            } = rootState
-            const res = await ApiService.post('/api/client/add', Object.assign(params, { userId }))
+        // async addClientAsync({ params, callback }, rootState) {
+        //     const {
+        //         App: { userId },
+        //     } = rootState
+        //     const res = await ApiService.post('/api/fund/history/query/page', Object.assign(params, { userId }))
 
-            if (res.code === 200) {
-                callback && callback()
-            }
-        },
+        //     if (res.code === 200) {
+        //         callback && callback()
+        //     }
+        // },
     }),
 }
-
-export default history

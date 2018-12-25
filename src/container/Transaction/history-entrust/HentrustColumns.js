@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export default [
     {
         title: '客户编号',
@@ -13,6 +15,9 @@ export default [
         title: '创建时间',
         dataIndex: 'createTime',
         key: 'createTime',
+        render: data => {
+            return moment(data).format('YYYY-MM-DD HH:mm:ss')
+        },
     },
     {
         title: '匹配时间',

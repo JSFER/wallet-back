@@ -1,4 +1,3 @@
-// /fund/out/in/query  出入金
 import React from 'react'
 import { connect } from 'react-redux'
 
@@ -10,13 +9,11 @@ const FormItem = Form.Item
 
 @Form.create()
 @connect(state => ({
-    Access: state.Access,
+    InAndout: state.InAndout,
 }))
-export default class Access extends React.Component {
+export default class InAndout extends React.Component {
     state = {
-        pageNo: '',
-        startDate: undefined,
-        endDate: undefined
+        pageNo: ''
     }
     componentDidMount() {
         this.fetch({
@@ -25,7 +22,7 @@ export default class Access extends React.Component {
     }
     fetch = payload => {
         this.props.dispatch({
-            type: 'Access/fetchAccessAsync',
+            type: 'InAndout/fetchInAndoutAsync',
             payload,
         })
     }
@@ -47,10 +44,10 @@ export default class Access extends React.Component {
         })
     }
     render() {
-        const { Access } = this.props
+        const { InAndout } = this.props
         const { getFieldDecorator } = this.props.form
-        const { Hentrusts, pageNo, pageSize, total } = Access
-        const { clientNo, startDate, endDate } = this.state
+        const { InAndouts, pageNo, pageSize, total } = InAndout
+        const { clientNo } = this.state
         const formItemLayout = {
             labelCol: {
                 span: 6,
@@ -69,30 +66,6 @@ export default class Access extends React.Component {
                             })(<Input placeholder="请输入客户编号" />)}
                         </FormItem>
                     </Col>
-                    <Col span={8}>
-                        <Form.Item
-                            {...formItemLayout}
-                                label="起始日期"
-                            >
-                            {getFieldDecorator('startDate',  {
-                                initialValue: startDate,
-                            })(
-                                <DatePicker placeholder="请选择开始时间" showTime format="YYYY-MM-DD HH:mm:ss" />
-                            )}
-                        </Form.Item>
-                    </Col>
-                    <Col span={8}>
-                        <Form.Item
-                            {...formItemLayout}
-                                label="结束日期"
-                            >
-                            {getFieldDecorator('endDate', {
-                                initialValue: endDate,
-                            })(
-                                <DatePicker placeholder="请选择结束时间" showTime format="YYYY-MM-DD HH:mm:ss" />
-                            )}
-                        </Form.Item>
-                    </Col>
                 </Row>
                 <Row>
                     <Col span={24} style={{ textAlign: 'right' }}>
@@ -104,7 +77,7 @@ export default class Access extends React.Component {
                 <Table
                     style={{ marginTop: 20 }}
                     columns={columns}
-                    dataSource={Hentrusts}
+                    dataSource={InAndouts}
                     pagination={{
                         current: pageNo + 1,
                         pageSize,

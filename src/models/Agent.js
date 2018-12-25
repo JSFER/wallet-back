@@ -27,6 +27,13 @@ const Agent = {
                 })
                 callback && callback(res.data)
             }
+        },
+        async addGroupAsync({ params, callback }){
+            const res = await ApiService.post(`/api/clientGroup/add`, params)
+
+            if (res.code === 200) {
+                callback && callback()
+            }
         }
     })
 }

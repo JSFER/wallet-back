@@ -13,6 +13,10 @@ import Historyentrust from '@src/models/Transaction/Historyentrust'
 import Historyhold from '@src/models/Transaction/Historyhold'
 import Historydeal from '@src/models/Transaction/Historydeal'
 
+import history from '@src/models/Funding/history'
+import inAndout from '@src/models/Funding/inAndout'
+import nAndOutHistory from '@src/models/Funding/nAndOutHistory'
+
 const store = init({
     models: {
         App,
@@ -27,7 +31,11 @@ const store = init({
         Entrust,
         Historyentrust,
         Historyhold,
-        Historydeal
+        Historydeal,
+
+        history,
+        inAndout,
+        nAndOutHistory
     },
 })
 

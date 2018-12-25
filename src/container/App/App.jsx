@@ -52,6 +52,11 @@ class App extends Component {
                     <Route exact path="/transaction/history-deal" component={Historydeal} />
                     <Route exact path="/transaction/history-entrust" component={Historyentrust} />
                     <Route exact path="/transaction/history-hold" component={HistoryHold} />
+
+                    {/* 资金 */}
+                    <Route exact path="/funding/inAndOut" component={() => import('@src/container/Funding/inAndout/inAndout')} />
+                    <Route exact path="/funding/nAndOutHistory" component={() => import('@src/container/Funding/nAndOutHistory/nAndOutHistory')} />
+                    <Route exact path="/funding/history" component={() => import('@src/container/Funding/history/history')} />
                 </div>
             </div>
         )

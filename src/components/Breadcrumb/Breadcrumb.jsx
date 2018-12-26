@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 const breadcrumbNameMap = {
     '/basic/exchangeRate': '基础设置 / 币种汇率信息',
+    '/basic/marketInfo': '基础设置 / 市场信息',
     '/basic/varietyInfo' : '基础设置 / 品种信息',
     '/people/client': '人员管理 / 客户管理',
     '/people/agent': '人员管理 / 代理人管理',

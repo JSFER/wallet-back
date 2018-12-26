@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 // modules
-import { Table, Input, Row, Col, Button, Form } from 'antd'
+import { Table, Input, Row, Col, Button, Form, Modal } from 'antd'
 import columns from './clientColumns'
- 
+
 const FormItem = Form.Item
 
 @Form.create()
@@ -16,6 +16,7 @@ class Client extends React.Component {
         clientId: '',
         agentId: '',
         groupId: '',
+        visible: false
     }
     componentDidMount() {
         this.fetch({
@@ -26,6 +27,11 @@ class Client extends React.Component {
         this.props.dispatch({
             type: 'Client/fetchClientsAsync',
             payload,
+        })
+    }
+    onAddClient = () => {
+        this.setState({
+            visible: true
         })
     }
     onPagination = next => {
@@ -58,35 +64,38 @@ class Client extends React.Component {
             },
         }
         return (
-            <div style={{paddingTop: 20}}>
+            <div style={{ paddingTop: 20 }}>
                 <Row>
-                    <Col span={8}>
+                    <Col span={7}>
                         <FormItem {...formItemLayout} label="客户ID">
                             {getFieldDecorator('clientId', {
                                 initialValue: clientId,
                             })(<Input placeholder="请输入客户ID" />)}
                         </FormItem>
                     </Col>
-                    <Col span={8}>
+                    <Col span={7}>
                         <FormItem {...formItemLayout} label="代理人ID">
                             {getFieldDecorator('agentId', {
                                 initialValue: agentId,
                             })(<Input placeholder="请输入代理人ID" />)}
                         </FormItem>
                     </Col>
-                    <Col span={8}>
+                    <Col span={7}>
                         <FormItem {...formItemLayout} label="分组ID">
                             {getFieldDecorator('groupId', {
                                 initialValue: groupId,
                             })(<Input placeholder="请输入分组ID" />)}
                         </FormItem>
                     </Col>
-                </Row>
-                <Row>
-                    <Col span={24} style={{ textAlign: 'right' }}>
+                    <Col span={3} style={{ textAlign: 'right', paddingTop: 4 }}>
                         <Button type="primary" onClick={this.onQuery}>
                             查询
                         </Button>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={24} style={{textAlign: 'right'}}>
+                        <Button type="primary" onClick={this.onAddClient}>添加客户</Button>
                     </Col>
                 </Row>
                 <Table
@@ -100,6 +109,19 @@ class Client extends React.Component {
                         onChange: this.onPagination,
                     }}
                 />
+                <Modal
+                    visible={this.state.visible}
+                    okText={'确认'}
+                    cancelText={'取消'}
+                    title={'添加客户'}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false
+                        })
+                    }}
+                >
+
+                </Modal>
             </div>
         )
     }

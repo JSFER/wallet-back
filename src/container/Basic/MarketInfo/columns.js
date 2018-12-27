@@ -3,32 +3,28 @@ import { Row, Col, Button, notification, Modal } from 'antd'
 
 export default instance => [
     {
-        title: '证券名称',
+        title: '市场名称',
         dataIndex: 'exchangeName',
         key: 'exchangeName',
     },
     {
-        title: '证券号码',
+        title: '市场编号',
         dataIndex: 'exchangeNo',
         key: 'exchangeNo',
     },
     {
-        title: '证券',
-        dataIndex: 'exchangeStatusEnum.text',
-        key: 'exchangeStatusEnum.text',
-    },
-    {
-        title: '状态',
-        dataIndex: 'status',
-        key: 'status',
-        // render: data => {
-        //     return data.text
-        // },
+        title: '市场状态',
+        dataIndex: 'exchangeStatusEnum',
+        key: 'exchangeStatusEnum',
+        render: data => {
+            return data.text
+        },
     },
     {
         title: '操作',
         dataIndex: 'id',
         key: 'action',
+        width: '200px',
         render: id => {
             return (
                 <Row>
@@ -36,14 +32,14 @@ export default instance => [
                         <Button
                             onClick={() => {
                                 instance.props.dispatch({
-                                    type: 'MarketInfo/fetchVarietyAsync',
+                                    type: 'MarketInfo/fetchMarketInfoAsync',
                                     payload: {
                                         id,
                                         callback: data => {
                                             instance.setState({
-                                                // variety: { ...data, commodityStatus: data.status },
-                                                // visible: true,
-                                                // action: 'edit',
+                                                marketinfo: { ...data, commodityStatus: data.exchangeStatusEnum.code},
+                                                visible: true,
+                                                action: 'edit',
                                             })
                                         },
                                     },
@@ -62,7 +58,7 @@ export default instance => [
                                     title: '确定要删除吗？',
                                     onOk: () => {
                                         instance.props.dispatch({
-                                            type: 'MarketInfo/deleteVarietyAsync',
+                                            type: 'MarketInfo/deleteMarketInfoAsync',
                                             payload: {
                                                 id,
                                                 callback: () => {

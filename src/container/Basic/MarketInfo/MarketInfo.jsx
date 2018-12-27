@@ -22,33 +22,35 @@ export default class MarketInfo extends React.Component {
         }
     }
     componentDidMount() {
-        const { dispatch } = this.props
-        this.getList()
-    }
-    // 请求数据
-    getList = () => {
-        this.props.dispatch({
-            type: 'MarketInfo/fetchMarketinfosAsync',
-            payload: {
-                pageNo: 0,
-            },
+        this.fetch({
+            pageNo: 0
         })
     }
-    handleSubmit = values => {
+    fetch = (payload) => {
+        const { dispatch } = this.props
+        dispatch({
+            type: 'MarketInfo/fetchMarketinfosAsync',
+            payload
+        })
+    }
+    handleSubmit = (values, action) => {
+        const actionName = action === 'add' ? 'addMarketInfoAsync' : 'updateMarketInfoAsync'
+
         const params = pick(values, ['exchangeName', 'exchangeNo', 'status'])
 
-        params.status = values.isBase ? 'Y' : 'N'
-
         this.props.dispatch({
-            type: 'MarketInfo/addMarketInfoAsync',
+            type: `MarketInfo/${actionName}`,
             payload: {
+                id: this.state.marketinfo.id,
                 params,
                 callback: () => {
                     notification.info({
                         message: '提示',
-                        description: '添加成功',
+                        description: action === 'add' ? '添加' : '更新' + '成功',
                     })
-                    this.getList()
+                    this.fetch({
+                        pageNo: 0
+                    })
                 },
             },
         })
@@ -56,7 +58,8 @@ export default class MarketInfo extends React.Component {
     handleAdd = () => {
         this.setState({
             visible: true,
-            currency: {},
+            action: 'add',
+            marketinfo: {},
         })
     }
     onPagination = next => {
@@ -103,7 +106,7 @@ export default class MarketInfo extends React.Component {
 
                         form.validateFields((err, values) => {
                             if (!err) {
-                                this.handleSubmit(values)
+                                this.handleSubmit(values, action)
                                 form.resetFields()
                                 this.setState({
                                     visible: false,

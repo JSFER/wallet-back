@@ -1,12 +1,13 @@
 import React from 'react'
-import { Row, Col, Form, Input, Checkbox } from 'antd'
+import { Row, Col, Form, Input, Select } from 'antd'
 
 const FormItem = Form.Item
+const Option = Select.Option
 
 @Form.create()
 class Edit extends React.Component {
     render() {
-        const { exchangeName, exchangeNo, status } = this.props
+        const { exchangeName, exchangeNo, status, commodityStatus } = this.props
         const { getFieldDecorator } = this.props.form
         const formItemLayout = {
             labelCol: {
@@ -41,18 +42,16 @@ class Edit extends React.Component {
                     <Col span={12}>
                         <FormItem {...formItemLayout} label="状态">
                             {getFieldDecorator('status', {
-                                rules: [{ required: true, message: '状态不能为空' }],
-                                initialValue: status,
-                            })(<Input placeholder="请输入状态" />)}
+                                rules: [{ required: true, message: '请选择交易状态' }],
+                                initialValue: commodityStatus,
+                            })(
+                                <Select>
+                                    <Option value="Y">允许交易</Option>
+                                    <Option value="N">禁止交易</Option>
+                                </Select>,
+                            )}
                         </FormItem>
                     </Col>
-                    {/* <Col span={12}>
-                        <FormItem {...formItemLayout} label="是否为基币">
-                            {getFieldDecorator('isBase', {
-                                initialValue: isBase,
-                            })(<Checkbox />)}
-                        </FormItem>
-                    </Col> */}
                 </Row>
             </Form>
         )

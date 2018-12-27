@@ -37,11 +37,36 @@ export default {
                 })
             }
         },
+        // 添加
         async addMarketInfoAsync({ params, callback }, rootState) {
             const {
-                App: { id },
+                App: { userId },
             } = rootState
-            const res = await ApiService.post('/api/exchange/add', Object.assign(params, { id }))
+            const res = await ApiService.post('/api/exchange/add', Object.assign(params, { id: userId }))
+
+            if (res.code === 200) {
+                callback && callback()
+            }
+        },
+        // 修改
+        async updateMarketInfoAsync({ id, params, callback }) {
+            const res = await ApiService.put(`/api/exchange/update/${id}`, params)
+
+            if (res.code === 200) {
+                callback && callback()
+            }
+        },
+        // 获取详情
+        async fetchMarketInfoAsync({ id, callback }) {
+            const res = await ApiService.get(`/api/exchange/update/query/${id}`)
+
+            if (res.code === 200) {
+                callback && callback(res.data)
+            }
+        },
+        // 删除
+        async deleteMarketInfoAsync({ id, callback }) {
+            const res = await ApiService.delete(`/api/exchange/delete/${id}`)
 
             if (res.code === 200) {
                 callback && callback()

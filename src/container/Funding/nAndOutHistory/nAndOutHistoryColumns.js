@@ -2,34 +2,43 @@ import moment from "moment";
 
 export default [
     {
-        title: '客户编号',
+        title: '出入金ID',
+        dataIndex: 'outInMoneyId',
+        key: 'outInMoneyId',
+    },
+    {
+        title: '客户编号（登入账号）',
         dataIndex: 'clientNo',
         key: 'clientNo',
     },
     {
-        title: '修改金额',
+        title: '资金方向',
+        dataIndex: 'outOrIn',
+        key: 'outOrIn',
+    },
+    {
+        title: '变动金额',
         dataIndex: 'changeMoney',
         key: 'changeMoney',
     },
     {
-        title: '修改时间',
+        title: '变动时间',
         dataIndex: 'changeTime',
         key: 'changeTime',
-        render: data => {
-            return moment(data).format('YYYY-MM-DD HH:mm:ss')
-        },
+    },
+    {
+        title: '修改操作员编号',
+        dataIndex: 'userNo',
+        key: 'userNo',
+    },
+    {
+        title: '方式',
+        dataIndex: 'mode',
+        key: 'mode',
     },
     {
         title: '备注',
-        dataIndex: 'remark',
-        key: 'remark',
+        dataIndex: 'remarks',
+        key: 'remarks',
     },
-    {
-        title: '出入列举',
-        dataIndex: 'outInModeEnum.text',
-        key: 'outInModeEnum.text',
-        // render: data => {
-        //     return statusMap[data.code]
-        // },
-    }
 ]

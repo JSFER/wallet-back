@@ -14,6 +14,8 @@ import InsureMoney from '@src/container/Params/InsureMoney'
 import VarietyInfo from '@src/container/Basic/VarietyInfo/VarietyInfo'
 import Poundage from '@src/container/Params/Poundage'
 import MarketInfo from '@src/container/Basic/MarketInfo/MarketInfo'
+import ContractInfo from '@src/container/Basic/ContractInfo/ContractInfo'
+
 // pages -- 交易查询
 import Query from '@src/container/Transaction/Query/Query'
 import Deal from '@src/container/Transaction/Deal/Deal'
@@ -46,6 +48,7 @@ class App extends Component {
                     <Route exact path="/basic/exchangeRate" component={Currency} />
                     <Route exact path="/basic/marketInfo" component={MarketInfo} />
                     <Route exact path="/basic/varietyInfo" component={VarietyInfo} />
+                    <Route exact path="/basic/contractInfo" component={ContractInfo} />
                     <Route exact path="/people/client" component={Client} />
                     <Route exact path="/people/agent" component={Agent} />
                     <Route exact path="/params/insureMoney" component={InsureMoney} />

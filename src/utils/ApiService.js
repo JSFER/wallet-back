@@ -11,7 +11,13 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(
     res => {
         const { data } = res
-
+        if(data.rtnCode != 200) {
+            notification.error({
+                message: data.msg,
+                description: '',
+            })
+            return 
+        }
         return {
             code: data.rtnCode,
             ...data,

@@ -22,19 +22,19 @@ class Edit extends React.Component {
             <Form>
                 <Row gutter={16}>
                     <Col span={12}>
-                        <FormItem {...formItemLayout} label="证券名称">
+                        <FormItem {...formItemLayout} label="市场名称">
                             {getFieldDecorator('exchangeName', {
-                                rules: [{ required: true, message: '证券名称不能为空' }],
+                                rules: [{ required: true, message: '市场名称不能为空' }],
                                 initialValue: exchangeName,
-                            })(<Input placeholder="请输入证券名称" />)}
+                            })(<Input placeholder="请输入市场名称" />)}
                         </FormItem>
                     </Col>
                     <Col span={12}>
-                        <FormItem {...formItemLayout} label="证券号码">
+                        <FormItem {...formItemLayout} label="市场编号">
                             {getFieldDecorator('exchangeNo', {
-                                rules: [{ required: true, message: '证券号码不能为空' }],
+                                rules: [{ required: true, message: '市场编号不能为空' }],
                                 initialValue: exchangeNo,
-                            })(<Input placeholder="请输入证券号码" />)}
+                            })(<Input placeholder="请输入市场编号" />)}
                         </FormItem>
                     </Col>
                 </Row>

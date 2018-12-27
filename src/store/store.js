@@ -6,6 +6,7 @@ import Agent from '@src/models/Agent'
 import Variety from '@src/models/Variety'
 import Template from '@src/models/Template'
 import MarketInfo from '@src/models/Basic/MarketInfo'
+import ContractInfo from '@src/models/Basic/ContractInfo'
 
 import Query from '@src/models/Transaction/Query'
 import Hold from '@src/models/Transaction/Hold'
@@ -27,6 +28,7 @@ const store = init({
         Variety,
         Template,
         MarketInfo,
+        ContractInfo,
         
         Query,
         Hold,

@@ -65,9 +65,7 @@ export default class Query extends React.Component {
                             })(<Input placeholder="请输入客户编号" />)}
                         </FormItem>
                     </Col>
-                </Row>
-                <Row>
-                    <Col span={24} style={{ textAlign: 'right' }}>
+                    <Col span={16} style={{ textAlign: 'right' }}>
                         <Button type="primary" onClick={this.onQuery}>
                             查询
                         </Button>

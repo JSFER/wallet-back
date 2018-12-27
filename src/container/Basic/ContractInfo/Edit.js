@@ -1,13 +1,15 @@
 import React from 'react'
 import { Row, Col, Form, Input, Select, DatePicker } from 'antd'
 
+const { MonthPicker, RangePicker } = DatePicker;
 const FormItem = Form.Item
 const Option = Select.Option
+import moment from 'moment';
 
 @Form.create()
 class Edit extends React.Component {
     render() {
-        const { commodityNo, contractName, commodityStatus, contractType, contractNo, exchangeNo, lastTradeDate, mainContract, status } = this.props
+        const { commodityNo, contractName, contractStatus, contractNo, exchangeNo, lastTradeDate } = this.props
         const { getFieldDecorator } = this.props.form
         const formItemLayout = {
             labelCol: {
@@ -59,7 +61,7 @@ class Edit extends React.Component {
                         <FormItem {...formItemLayout} label="品种状态">
                             {getFieldDecorator('status', {
                                 rules: [{ required: true, message: '请选择品种状态' }],
-                                initialValue: commodityStatus,
+                                initialValue: contractStatus,
                             })(
                                 <Select>
                                     <Option value="Y">允许交易</Option>
@@ -70,26 +72,11 @@ class Edit extends React.Component {
                         </FormItem>
                     </Col>
                     <Col span={8}>
-                        <FormItem {...formItemLayout} label="主力合约">
-                            {getFieldDecorator('mainContract', {
-                                rules: [{ required: true, message: '请选择主力合约' }],
-                                initialValue: mainContract,
-                            })(
-                                <Select>
-                                    <Option value="1">是</Option>
-                                    <Option value="0">否</Option>
-                                </Select>,
-                            )}
-                        </FormItem>
-                    </Col>
-                </Row>
-                <Row gutter={16}>
-                    <Col span={8}>
                         <FormItem {...formItemLayout} label="最后交易日">
                             {getFieldDecorator('lastTradeDate', {
                                 rules: [{ required: true, message: '最后交易日不能为空' }],
-                                initialValue: lastTradeDate,
-                            })(<Input placeholder="请输入最后交易日" />)}
+                                initialValue: lastTradeDate?moment(lastTradeDate, 'YYYY-MM-DD HH:mm:ss'):undefined,
+                            })(<DatePicker placeholder="请选择最后交易日" showTime format="YYYY-MM-DD HH:mm:ss" />)}
                         </FormItem>
                     </Col>
                 </Row>

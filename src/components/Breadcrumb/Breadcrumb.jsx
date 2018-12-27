@@ -6,8 +6,11 @@ const breadcrumbNameMap = {
     '/basic/marketInfo': '基础设置 / 市场信息',
     '/basic/varietyInfo' : '基础设置 / 品种信息',
     '/basic/contractInfo' : '基础设置 / 合约信息',
+    '/basic/masterContract' : '基础设置 / 主力合约',
+
     '/people/client': '人员管理 / 客户管理',
     '/people/agent': '人员管理 / 代理人管理',
+
     '/params/insureMoney': '参数信息 / 保证金模板信息',
     '/params/poundage': '参数信息 / 手续费模板信息',
 

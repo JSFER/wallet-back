@@ -48,12 +48,12 @@ export default instance => [
                         <Button
                             onClick={() => {
                                 instance.props.dispatch({
-                                    type: 'ContractInfo/fetchContractInfoAsync',
+                                    type: 'MasterContract/fetchMasterContractAsync',
                                     payload: {
                                         id,
                                         callback: data => {
                                             instance.setState({
-                                                contractinfo: { ...data, contractStatus: data.contractStatusEnum.code },
+                                                mastercontract: { ...data, contractStatus: data.contractStatusEnum.code },
                                                 visible: true,
                                                 action: 'edit',
                                             })
@@ -74,7 +74,7 @@ export default instance => [
                                     title: '确定要删除吗？',
                                     onOk: () => {
                                         instance.props.dispatch({
-                                            type: 'ContractInfo/deleteContractInfoAsync',
+                                            type: 'MasterContract/deleteMasterContractAsync',
                                             payload: {
                                                 id,
                                                 callback: () => {

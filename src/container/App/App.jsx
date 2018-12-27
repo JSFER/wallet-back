@@ -15,6 +15,7 @@ import VarietyInfo from '@src/container/Basic/VarietyInfo/VarietyInfo'
 import Poundage from '@src/container/Params/Poundage'
 import MarketInfo from '@src/container/Basic/MarketInfo/MarketInfo'
 import ContractInfo from '@src/container/Basic/ContractInfo/ContractInfo'
+import MasterContract from '@src/container/Basic/MasterContract/MasterContract'
 
 // pages -- 交易查询
 import Query from '@src/container/Transaction/Query/Query'
@@ -49,8 +50,11 @@ class App extends Component {
                     <Route exact path="/basic/marketInfo" component={MarketInfo} />
                     <Route exact path="/basic/varietyInfo" component={VarietyInfo} />
                     <Route exact path="/basic/contractInfo" component={ContractInfo} />
+                    <Route exact path="/basic/MasterContract" component={MasterContract} />
+                    
                     <Route exact path="/people/client" component={Client} />
                     <Route exact path="/people/agent" component={Agent} />
+                    
                     <Route exact path="/params/insureMoney" component={InsureMoney} />
                     <Route exact path="/params/poundage" component={Poundage} />
 

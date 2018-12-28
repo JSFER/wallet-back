@@ -125,7 +125,7 @@ class Agent extends React.Component {
             })
         } else {
             this.setState({
-                groupModalMode: 'edit',
+                groupModalMode: 'add',
                 addGroupModalVisible: true,
             })
         }

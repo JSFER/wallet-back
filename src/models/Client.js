@@ -26,7 +26,7 @@ const Client = {
             } = rootState
             const { clientId, agentId, groupId } = params
             const res = await ApiService.post(`/api/client/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, {
-                clientIdNo: clientId,
+                clientNo: clientId,
                 clientGroupId: groupId,
                 clientAgentId: agentId
             })
@@ -47,6 +47,13 @@ const Client = {
                 App: { userId },
             } = rootState
             const res = await ApiService.post('/api/client/add', Object.assign(params, { userId }))
+
+            if (res.code === 200) {
+                callback && callback()
+            }
+        },
+        async updateClientAsync({id, params, callback}){
+            const res = await ApiService.put(`/api/client/update/${id}`, params)
 
             if (res.code === 200) {
                 callback && callback()

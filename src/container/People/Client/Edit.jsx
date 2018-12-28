@@ -1,20 +1,46 @@
 import React from 'react'
 import { Row, Col, Form, Input, Select, Cascader } from 'antd'
-import { connect } from 'dva'
+import { connect } from 'react-redux'
+import map from 'lodash/map'
+import filter from 'lodash/filter'
 
 const FormItem = Form.Item
 const Option = Select.Option
 
 @Form.create()
-@connect(
-    state => ({ agents: state.Agent.agents})
-)
+@connect(state => ({ agents: state.Agent.agents }))
 class ClientEdit extends React.Component {
-    parse = (agents) => {
-        
+    componentDidMount() {
+        this.props.dispatch({
+            type: 'Agent/fetchAgentAsync',
+            payload: {},
+        })
+    }
+    parse = agents => {
+        return map(filter(agents, a => a.clientGroupList && a.clientGroupList.length), agent => {
+            return {
+                value: agent.id,
+                label: agent.clientAgentName,
+                children: map(agent.clientGroupList, group => {
+                    return {
+                        value: group.id,
+                        label: group.clientGroupName,
+                    }
+                }),
+            }
+        })
     }
     render() {
-        const { clientNo, clientName, clientStatus, clientPhone, clientIdNo, clientPassword, clientAgentId, clientGroupId } = this.props
+        const {
+            clientNo,
+            clientName,
+            clientStatus,
+            clientPhone,
+            clientIdNo,
+            clientPassword,
+            clientAgentId,
+            clientGroupId,
+        } = this.props
         const { getFieldDecorator } = this.props.form
         const formItemLayout = {
             labelCol: {
@@ -56,14 +82,14 @@ class ClientEdit extends React.Component {
                                     <Option value="Y">允许交易</Option>
                                     <Option value="N">禁止交易</Option>
                                     <Option value="C">只可平仓</Option>
-                                    <Option value="D">禁止登陆</Option>
+                                    <Option value="D">禁止登录</Option>
                                 </Select>,
                             )}
                         </FormItem>
                     </Col>
                     <Col span={12}>
                         <FormItem {...formItemLayout} label="手机号">
-                            {getFieldDecorator('clientName', {
+                            {getFieldDecorator('clientPhone', {
                                 rules: [{ required: true, message: '手机号不能为空' }],
                                 initialValue: clientPhone,
                             })(<Input placeholder="请输入手机号" />)}
@@ -91,10 +117,10 @@ class ClientEdit extends React.Component {
                 <Row>
                     <Col span={24}>
                         <FormItem {...formItemLayout} label="选择分组">
-                            {getFieldDecorator('aaa', {
+                            {getFieldDecorator('group', {
                                 rules: [{ required: true, message: '分组不能为空' }],
                                 initialValue: [clientAgentId, clientGroupId],
-                            })(<Cascader options={this.parse(agents)} />)}
+                            })(<Cascader options={this.parse(this.props.agents)} />)}
                         </FormItem>
                     </Col>
                 </Row>

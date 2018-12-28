@@ -27,8 +27,8 @@ export default class UserLogin extends Component {
         super(props)
         this.state = {
             value: {
-                username: 'admin',
-                password: 'admin',
+                username: '',
+                password: '',
             },
             showSpin: false,
         }

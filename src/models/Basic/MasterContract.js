@@ -1,5 +1,6 @@
 import ApiService from '@src/utils/ApiService'
 import cloneDeep from 'lodash/cloneDeep'
+import each from 'lodash/each'
 
 export default {
     state: {
@@ -38,11 +39,14 @@ export default {
             }
         },
         // 添加
-        async addMasterContractAsync({ params, callback }, rootState) {
-            const {
-                App: { userId },
-            } = rootState
-            const res = await ApiService.post('/api/contract/main/add', Object.assign(params))
+        async addMasterContractAsync({ params, callback }) {
+            let queryStr = ''
+
+            each(params.idList, id => {
+                queryStr += `&idList=${id}`
+            })
+            
+            const res = await ApiService.post(`/api/contract/main/add?${queryStr}`)
             
             if (res.code === 200) {
                 callback && callback()

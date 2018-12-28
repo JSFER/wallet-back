@@ -42,7 +42,7 @@ export default {
             const {
                 App: { userId },
             } = rootState
-            const res = await ApiService.post('/api/contract/add', Object.assign(params, {mainContract: 1}))
+            const res = await ApiService.post('/api/contract/main/add', Object.assign(params))
             
             if (res.code === 200) {
                 callback && callback()

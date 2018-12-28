@@ -5,11 +5,13 @@ import pick from 'lodash/pick'
 // modules
 import { Table, Modal, Row, Col, Button, notification } from 'antd'
 import Edit from '../ContractInfo/Edit'
+import MasterEdit from './Edit'
 
 import columns from './columns'
 
 @connect(state => ({
     ...state.MasterContract,
+    ...state.ContractInfo
 }))
 export default class MasterContract extends React.Component {
     constructor(props) {
@@ -19,11 +21,19 @@ export default class MasterContract extends React.Component {
             mastercontract: {},
             action: 'add',
             visible: false,
+
+            visible2: false,
         }
     }
     componentDidMount() {
         this.fetch({
             pageNo: 0
+        })
+        this.props.dispatch({
+            type: 'ContractInfo/fetchContractInfosAsync',
+            payload: {
+                pageNo: 0,
+            },
         })
     }
     fetch = (payload) => {
@@ -55,11 +65,32 @@ export default class MasterContract extends React.Component {
             },
         })
     }
+    handleSubmit2 = values => {
+        const params = pick(values, ['idList'])
+
+        this.props.dispatch({
+            type: `MasterContract/addMasterContractAsync`,
+            payload: {
+                id: this.state.mastercontract.id,
+                params,
+                callback: () => {
+                    notification.info({
+                        message: '提示',
+                        description: '添加成功',
+                    })
+                    this.fetch({
+                        pageNo: 0
+                    })
+                },
+            },
+        })
+    }
     handleAdd = () => {
         this.setState({
-            visible: true,
-            action: 'add',
-            mastercontract: {},
+            // visible: true,
+            // action: 'add',
+            // mastercontract: {},
+            visible2: true,
         })
     }
     onPagination = next => {
@@ -71,8 +102,8 @@ export default class MasterContract extends React.Component {
         })
     }
     render() {
-        const { mastercontracts, pageNo, pageSize, total } = this.props
-        const { action, mastercontract, visible } = this.state
+        const { mastercontracts, pageNo, pageSize, total, contractinfos } = this.props
+        const { action, mastercontract, visible, visible2 } = this.state
         const title = action === 'add' ? '添加合约信息' : '编辑合约信息'
 
         return (
@@ -125,6 +156,39 @@ export default class MasterContract extends React.Component {
                             this.modalRef = ref
                         }}
                         {...mastercontract}
+                    />
+                </Modal>
+
+                <Modal
+                    width={innerWidth * 0.5}
+                    visible={visible2}
+                    title='添加主力合约'
+                    okText='确认'
+                    cancelText='取消'
+                    onOk={() => {
+                        const form = this.modalRef2.getForm()
+                        form.validateFields((err, values) => {
+                            if (!err) {
+                                // console.log(values)
+                                this.handleSubmit2(values)
+                                form.resetFields()
+                                this.setState({
+                                    visible2: false,
+                                })
+                            }
+                        })
+                    }}
+                    onCancel={() => {
+                        this.setState({
+                            visible2: false,
+                        })
+                    }}
+                >
+                    <MasterEdit
+                        ref={ref => {
+                            this.modalRef2 = ref
+                        }}
+                        contractinfos = {contractinfos}
                     />
                 </Modal>
             </div>

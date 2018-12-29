@@ -45,7 +45,7 @@ export default class UserLogin extends Component {
 
         const { dispatch, history } = this.props
         if (!this.state.showSpin) {
-            this.setState({ showSpin: true })
+            // this.setState({ showSpin: true })
             this.refs.form.validateAll((errors, values) => {
                 if (errors) {
                     console.log('errors', errors)

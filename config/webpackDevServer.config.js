@@ -83,7 +83,7 @@ module.exports = function(proxy, allowedHost) {
     proxy: {
       '/api': {
         target: 'http://116.62.130.69:8080',
-        pathRewrite: {'^/api' : ''}
+        
       }
     },
     before(app) {

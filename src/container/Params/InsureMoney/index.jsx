@@ -12,10 +12,13 @@ import find from 'lodash/find'
     varieties: state.Variety.varieties,
     detail: state.Template.detail
 }))
-class InsureMoney extends React.Component {
+class Poundage extends React.Component {
+    type = 0
     state = {
         detailVisible: false,
         editVisible: false,
+        currentTemplateId: '',
+        mode: 'add'
     }
     componentDidMount() {
         this.fetch()
@@ -25,14 +28,31 @@ class InsureMoney extends React.Component {
             type: 'Template/fetchTemplatesAsync',
             payload: {
                 pageNo: 0,
-                type: 0
+                type: this.type
             },
         })
     }
-    onPagination = () => {}
+    onPagination = (next) => {
+        this.props.dispatch({
+            type: 'Template/fetchTemplatesAsync',
+            payload: {
+                pageNo: next - 1,
+                type: this.type
+            },
+        })
+    }
+    onUpdate = (id) => {
+        this.setState({
+            editVisible: true,
+            currentTemplateId: id,
+            mode: 'update'
+        })
+    }
     onAdd = () => {
         this.setState({
             editVisible: true,
+            currentTemplateId: '',
+            mode: 'add'
         })
     }
     handleSubmit = (values) => {
@@ -41,7 +61,7 @@ class InsureMoney extends React.Component {
         forIn(values, (value, key) => {
             if (key.startsWith('fee_')) {
                 const id = key.split('_')[1]
-                const item = find(this.props.varieties, v => v.id == id)
+                const item = find(this.props.varieties, v => v.commodityNo == id)
 
                 feeList.push({
                     commodityName: item.commodityName,
@@ -54,18 +74,21 @@ class InsureMoney extends React.Component {
         const params = {
             feeTemplateName: values.feeTemplateName,
             remark: values.remark,
-            type: 0,
+            type: this.type,
             feeTemplateCommodityList: feeList
         }
 
+        const action = this.state.mode === 'add' ? 'addTemplateAsync' : 'updateTemplateAsync'
+
         this.props.dispatch({
-            type: 'Template/addTemplateAsync',
+            type: 'Template/' + action,
             payload: {
+                id: this.state.currentTemplateId,
                 params,
                 callback: () => {
                     notification.info({
                         message: '提示',
-                        description: '添加成功',
+                        description: this.state.mode === 'add' ? '添加成功' : '更新成功',
                     })
                     
                     this.fetch()
@@ -75,9 +98,10 @@ class InsureMoney extends React.Component {
     }
     render() {
         const { templates, pageNo, pageSize, total } = this.props.insure
+        const template = find(templates, t => t.id === this.state.currentTemplateId) || {}
 
         return (
-            <div className="page-insure-money">
+            <div>
                 <Row>
                     <Col span={24} style={{ textAlign: 'right' }}>
                         <Button type="primary" onClick={this.onAdd}>
@@ -137,6 +161,9 @@ class InsureMoney extends React.Component {
                     }}
                 >
                     <Edit
+                        {...template}
+                        {...this.props.detail}
+                        mode={this.state.mode}
                         ref={ref => {
                             this.editRef = ref
                         }}
@@ -147,4 +174,4 @@ class InsureMoney extends React.Component {
     }
 }
 
-export default InsureMoney
+export default Poundage

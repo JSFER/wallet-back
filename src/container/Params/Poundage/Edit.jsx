@@ -11,9 +11,13 @@ const FormItem = Form.Item
     ...state.Variety,
 }))
 class Edit extends React.Component {
-    state = {
-        targetKeys: [],
-        selectedKeys: [],
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            targetKeys: props.mode === 'add' ? [] : props.details.map(d => d.commodityNo),
+            selectedKeys: [],
+        }
     }
     componentDidMount() {
         this.fetch()
@@ -39,7 +43,7 @@ class Edit extends React.Component {
         })
     }
     render() {
-        const { varieties } = this.props
+        const { varieties, feeTemplateName, remark } = this.props
         const { targetKeys, selectedKeys } = this.state
         const { getFieldDecorator } = this.props.form
         const formItemLayout = {
@@ -57,14 +61,14 @@ class Edit extends React.Component {
                         <FormItem {...formItemLayout} label="模板名称">
                             {getFieldDecorator('feeTemplateName', {
                                 rules: [{ required: true, message: '模板名称不能为空' }],
-                                initialValue: '',
+                                initialValue: feeTemplateName,
                             })(<Input placeholder="请输入模板名称" />)}
                         </FormItem>
                     </Col>
                     <Col span={12}>
                         <FormItem {...formItemLayout} label="备注">
                             {getFieldDecorator('remark', {
-                                initialValue: '',
+                                initialValue: remark,
                             })(<Input placeholder="请输入备注" />)}
                         </FormItem>
                     </Col>
@@ -72,7 +76,7 @@ class Edit extends React.Component {
                 <Row type="flex">
                     <Col offset={1} span={13}>
                         <Transfer
-                            dataSource={varieties}
+                            dataSource={varieties.map( v => ({...v, key: v.commodityNo}))}
                             targetKeys={targetKeys}
                             selectedKeys={selectedKeys}
                             titles={['品种列表', '已选中']}
@@ -83,15 +87,15 @@ class Edit extends React.Component {
                     </Col>
                     <Col span={10}>
                         {targetKeys.map(tk => (
-                            <FormItem key={tk} {...{labelCol: {span: 14}, wrapperCol: {span: 10}}} label={`${find(varieties, v => v.id === tk).commodityName}的费率`}>
+                            <FormItem
+                                key={tk}
+                                {...{ labelCol: { span: 14 }, wrapperCol: { span: 10 } }}
+                                label={`${get(find(varieties, v => v.commodityNo === tk), 'commodityName')}的费率`}
+                            >
                                 {getFieldDecorator(`fee_${tk}`, {
                                     rules: [{ required: true, message: '费率不能为空' }],
-                                })(
-                                    <Input
-                                        type="number"
-                                        placeholder={`请输入的费率`}
-                                    />,
-                                )}
+                                    initialValue: get(find(this.props.details, d => d.commodityNo === tk), 'fee')
+                                })(<Input type="number" placeholder={`请输入的费率`} />)}
                             </FormItem>
                         ))}
                     </Col>

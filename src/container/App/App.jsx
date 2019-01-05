@@ -51,10 +51,10 @@ class App extends Component {
                     <Route exact path="/basic/varietyInfo" component={VarietyInfo} />
                     <Route exact path="/basic/contractInfo" component={ContractInfo} />
                     <Route exact path="/basic/MasterContract" component={MasterContract} />
-                    
+
                     <Route exact path="/people/client" component={Client} />
                     <Route exact path="/people/agent" component={Agent} />
-                    
+
                     <Route exact path="/params/insureMoney" component={InsureMoney} />
                     <Route exact path="/params/poundage" component={Poundage} />
 

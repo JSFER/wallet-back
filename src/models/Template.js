@@ -62,7 +62,7 @@ const Template = {
                 })
             }
         },
-        async fetchDetailsAsync({ id, pageNo = 0, params = {} }, rootState) {
+        async fetchDetailsAsync({ id, pageNo = 0, callback }, rootState) {
             const { pageSize } = rootState.Template.detail
             const res = await ApiService.get(
                 `/api/feeTemplate/commodity／query/page?feeTemplateId=${id}&pageIndex=${pageNo}&pageSize=${pageSize}`,
@@ -77,6 +77,8 @@ const Template = {
                         pageNo,
                     },
                 })
+
+                callback && callback()
             }
         },
         async addTemplateAsync({params, callback}){
@@ -84,6 +86,20 @@ const Template = {
 
             if(res.code === 200){
                 callback && callback()
+            }
+        },
+        async deleteTemplateAsync({ id, callback}){
+            const res = await ApiService.delete(`/api/feeTemplate/delete/${id}`)
+
+            if (res.code === 200) {
+                callback()
+            }
+        },
+        async updateTemplateAsync({id, params, callback}){
+            const res = await ApiService.put(`/api/feeTemplate/update/${id}`, params)
+
+            if (res.code === 200) {
+                callback()
             }
         }
     }),

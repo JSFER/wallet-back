@@ -38,6 +38,14 @@ export default instance => [
         key: 'clientIdNo',
     },
     {
+        title: '所属代理人',
+        dataIndex: 'clientAgentName',
+    },
+    {
+        title: '客户分组',
+        dataIndex: 'clientGroupName',
+    },
+    {
         title: '注册日期',
         dataIndex: 'clientRegistDate',
         key: 'clientRegistDate',

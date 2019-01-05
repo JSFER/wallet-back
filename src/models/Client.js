@@ -1,5 +1,5 @@
 import ApiService from '@src/utils/ApiService'
-import cloneDeep from 'lodash/cloneDeep'
+import _ from 'lodash'
 
 const Client = {
     state: {
@@ -10,7 +10,7 @@ const Client = {
     },
     reducers: {
         updateClients: (state, { clients, total, pageNo }) => {
-            const nState = cloneDeep(state)
+            const nState = _.cloneDeep(state)
 
             nState.clients = clients.map(c => ({ key: c.id, ...c }))
             nState.total = total
@@ -28,19 +28,45 @@ const Client = {
             const res = await ApiService.post(`/api/client/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, {
                 clientNo: clientId,
                 clientGroupId: groupId,
-                clientAgentId: agentId
+                clientAgentId: agentId,
             })
+            let clients = res.data.data
 
-            if (res.code === 200) {
-                dispatch({
-                    type: 'Client/updateClients',
-                    payload: {
-                        clients: res.data.data,
-                        total: res.data.total,
-                        pageNo,
+            dispatch({
+                type: 'Agent/fetchAgentAsync',
+                payload: {
+                    callback: agents => {
+                        clients = clients.map(client => {
+                            const { clientAgentId, clientGroupId } = client
+
+                            return {
+                                ...client,
+                                clientAgentName: _.chain(agents)
+                                    .find(a => a.id == clientAgentId)
+                                    .get('clientAgentName')
+                                    .value(),
+                                clientGroupName: _.chain(agents)
+                                    .find(a => a.id == clientAgentId)
+                                    .get('clientGroupList')
+                                    .find(g => g.id == clientGroupId)
+                                    .get('clientGroupName')
+                                    .value(),
+                            }
+                        })
+
+                        if (res.code === 200) {
+                            dispatch({
+                                type: 'Client/updateClients',
+                                payload: {
+                                    clients,
+                                    total: res.data.total,
+                                    pageNo,
+                                },
+                            })
+                        }
                     },
-                })
-            }
+                },
+            })
         },
         async addClientAsync({ params, callback }, rootState) {
             const {
@@ -52,7 +78,7 @@ const Client = {
                 callback && callback()
             }
         },
-        async updateClientAsync({id, params, callback}){
+        async updateClientAsync({ id, params, callback }) {
             const res = await ApiService.put(`/api/client/update/${id}`, params)
 
             if (res.code === 200) {

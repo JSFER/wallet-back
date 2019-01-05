@@ -29,7 +29,7 @@ class MasterEdit extends React.Component {
                                 <Select mode="multiple">
                                     {
                                         contractinfos.map((v,key) => {
-                                            return <Option key={key} value={v.id}>{v.contractName}</Option>
+                                            return <Option key={key} value={v.id}>{v.commodityNo} {v.contractNo} {v.contractName}</Option>
                                         })
                                     }
                                 </Select>,

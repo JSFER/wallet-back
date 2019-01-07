@@ -19,6 +19,8 @@ import Historydeal from '@src/models/Transaction/Historydeal'
 import History from '@src/models/Funding/history'
 import InAndout from '@src/models/Funding/inAndout'
 import NAndOutHistory from '@src/models/Funding/nAndOutHistory'
+import CreditList from '@src/models/Funding/creditList'
+import HistoryCreditList from '@src/models/Funding/historyCreditList'
 
 const store = init({
     models: {
@@ -41,7 +43,9 @@ const store = init({
 
         History,
         InAndout,
-        NAndOutHistory
+        NAndOutHistory,
+        CreditList,
+        HistoryCreditList
     },
 })
 

@@ -30,6 +30,8 @@ import HistoryHold from '@src/container/Transaction/history-hold/history-hold'
 import History from '@src/container/Funding/history/history'
 import InAndout from '@src/container/Funding/inAndout/inAndout'
 import NAndOutHistory from '@src/container/Funding/nAndOutHistory/nAndOutHistory'
+import CreditList from '@src/container/Funding/creditList/creditList'
+import HistoryCreditList from '@src/container/Funding/historyCreditList/historyCreditList'
 
 // style
 import './App.css'
@@ -71,6 +73,8 @@ class App extends Component {
                     <Route exact path="/funding/inAndOut" component={InAndout} />
                     <Route exact path="/funding/nAndOutHistory" component={NAndOutHistory} />
                     <Route exact path="/funding/history" component={History} />
+                    <Route exact path="/funding/creditList" component={CreditList} />
+                    <Route exact path="/funding/historyCreditList" component={HistoryCreditList} />
                 </div>
             </div>
         )

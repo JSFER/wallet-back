@@ -8,6 +8,7 @@ const breadcrumbNameMap = {
     '/basic/contractInfo' : '基础设置 / 合约信息',
     '/basic/masterContract' : '基础设置 / 主力合约',
 
+    '/people/user': '人员管理 / 用户管理',
     '/people/client': '人员管理 / 客户管理',
     '/people/agent': '人员管理 / 代理人管理',
 

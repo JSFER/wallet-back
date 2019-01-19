@@ -8,8 +8,11 @@ import BreadcrumbCustom from '@src/components/Breadcrumb/Breadcrumb'
 
 // pages
 import Currency from '@src/container/Basic/Currency/Currency'
+
+import User from '@src/container/People/User/User'
 import Client from '@src/container/People/Client/Client'
 import Agent from '@src/container/People/Agent/Agent'
+
 import InsureMoney from '@src/container/Params/InsureMoney'
 import VarietyInfo from '@src/container/Basic/VarietyInfo/VarietyInfo'
 import Poundage from '@src/container/Params/Poundage'
@@ -54,6 +57,7 @@ class App extends Component {
                     <Route exact path="/basic/contractInfo" component={ContractInfo} />
                     <Route exact path="/basic/MasterContract" component={MasterContract} />
 
+                    <Route exact path="/people/user" component={User} />
                     <Route exact path="/people/client" component={Client} />
                     <Route exact path="/people/agent" component={Agent} />
 

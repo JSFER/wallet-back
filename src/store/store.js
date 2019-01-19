@@ -2,6 +2,8 @@ import { init } from '@rematch/core'
 import App from '@src/models/App'
 import Currency from '@src/models/Currency'
 import Client from '@src/models/Client'
+import User from '@src/models/People/User'
+
 import Agent from '@src/models/Agent'
 import Variety from '@src/models/Variety'
 import Template from '@src/models/Template'
@@ -34,6 +36,7 @@ const store = init({
         ContractInfo,
         MasterContract,
         
+        User,
         Query,
         Hold,
         Entrust,

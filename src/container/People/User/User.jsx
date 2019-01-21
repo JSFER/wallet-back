@@ -19,19 +19,22 @@ class User extends React.Component {
         clientId: '',
         agentId: '',
         groupId: '',
-        visible: false,
-        currentClientId: '',
-        action: 'add',
 
-        email: "",
-        realName: "",
-        userName: "",
-        password: "",
-        sysRoleCustomList: [],
+
+        visible: false,
+        userId: '',
+        action: 'add',
+        
+        // 默认值
+        userInfo: {}
+
     }
     componentDidMount() {
         this.fetch({
             pageNo: 0,
+        })
+        this.props.dispatch({
+            type: 'User/fetchRoleAsync'
         })
     }
     fetch = payload => {
@@ -41,6 +44,7 @@ class User extends React.Component {
         })
     }
     onAddUser = () => {
+        this.resetUserInfo();
         this.setState({
             action: 'add',
             visible: true,
@@ -49,6 +53,11 @@ class User extends React.Component {
     onPagination = next => {
         this.fetch({
             pageNo: next - 1,
+        })
+    }
+    resetUserInfo = () => {
+        this.setState({
+            userInfo: {}
         })
     }
     onQuery = () => {
@@ -65,15 +74,17 @@ class User extends React.Component {
     // 添加用户
     handleSubmit = (values, action) => {
         const type = action === 'add' ? 'User/addUserAsync' : 'User/updateUserAsync'
-
+        // console.log(values)
         this.props.dispatch({
             type,
             payload: {
-                id: this.state.currentClientId,
+                id: this.state.userId,
                 params: {
                     email: values.email,
                     realName: values.realName,
-                    sysRoleCustomList: [],
+                    sysRoleCustomList: values.sysRoleCustomList.map(i => {
+                        return {id: i.key}
+                    }),
                     userName: values.userName,
                     password: values.password
                 },
@@ -93,7 +104,7 @@ class User extends React.Component {
         const { User } = this.props
         const { getFieldDecorator } = this.props.form
         const { users, pageNo, pageSize, total } = User
-        const { clientId, agentId, groupId, currentClientId } = this.state
+        const { userId, userInfo } = this.state
         const formItemLayout = {
             labelCol: {
                 span: 6,
@@ -102,7 +113,7 @@ class User extends React.Component {
                 span: 16,
             },
         }
-        const currentClient = find(users, ['id', currentClientId])
+        const id = find(users, ['id', userId]);
 
         return (
             <div style={{ paddingTop: 20 }}>
@@ -168,7 +179,6 @@ class User extends React.Component {
 
                         form.validateFields((err, values) => {
                             if (!err) {
-                                // console.log(values)
                                 this.handleSubmit(values, this.state.action)
                                 form.resetFields()
                                 this.setState({
@@ -180,8 +190,8 @@ class User extends React.Component {
                 >
                     <Edit
                         ref={ref => (this.modalRef = ref)}
-                        {...currentClient}
-                        clientStatus={get(currentClient, 'clientStatusEnum.code')}
+                        {...userInfo}
+                        action={this.state.action}
                     />
                 </Modal>
             </div>

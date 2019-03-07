@@ -3,7 +3,7 @@ import noop from 'lodash/noop'
 
 const App = {
     state: {
-        hasLogin: false,
+        hasLogin: true,
         username: '',
         userId: 0
     },

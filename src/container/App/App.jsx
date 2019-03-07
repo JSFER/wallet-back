@@ -20,6 +20,8 @@ import MarketInfo from '@src/container/Basic/MarketInfo/MarketInfo'
 import ContractInfo from '@src/container/Basic/ContractInfo/ContractInfo'
 import MasterContract from '@src/container/Basic/MasterContract/MasterContract'
 
+import Customer from '@src/container/Params/Customer'
+
 // pages -- 交易查询
 import Query from '@src/container/Transaction/Query/Query'
 import Deal from '@src/container/Transaction/Deal/Deal'
@@ -63,6 +65,7 @@ class App extends Component {
 
                     <Route exact path="/params/insureMoney" component={InsureMoney} />
                     <Route exact path="/params/poundage" component={Poundage} />
+                    <Route exact path="/params/Customer" component={Customer} />
 
                     {/* 交易查询 */}
                     <Route exact path="/transaction/query" component={Query} />

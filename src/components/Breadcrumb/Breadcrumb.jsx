@@ -14,6 +14,7 @@ const breadcrumbNameMap = {
 
     '/params/insureMoney': '参数信息 / 保证金模板信息',
     '/params/poundage': '参数信息 / 手续费模板信息',
+    '/params/Customer': '参数信息 / 客户组模板分配',
 
     // 交易查询
     '/transaction/query': '交易查询 / 成交信息',

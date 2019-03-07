@@ -11,6 +11,8 @@ import MarketInfo from '@src/models/Basic/MarketInfo'
 import ContractInfo from '@src/models/Basic/ContractInfo'
 import MasterContract from '@src/models/Basic/MasterContract'
 
+import Customer from '@src/models/Params/Customer'
+
 import Query from '@src/models/Transaction/Query'
 import Hold from '@src/models/Transaction/Hold'
 import Entrust from '@src/models/Transaction/Entrust'
@@ -43,6 +45,8 @@ const store = init({
         Historyentrust,
         Historyhold,
         Historydeal,
+
+        Customer,
 
         History,
         InAndout,

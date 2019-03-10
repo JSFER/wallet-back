@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Row, Col, Form, Input, Select } from 'antd'
+import _ from 'lodash'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -8,15 +9,15 @@ const Option = Select.Option
 @Form.create()
 @connect(state => ({
     Template: state.Template,
+    clientGroups: _.chain(state.Agent.agents).map(i => [...i.clientGroupList]).flatten().value()
 }))
 
 class Edit extends React.Component {
     render() {
 
-        const { Template } = this.props
+        const { Template, clientGroups } = this.props
         // poundage 手续费， insure 保证金
         const { insure, poundage  } = Template
-        console.log(Template)
         // 保证金
         let children = [];
         for (let i = 0; i < insure.templates.length; i++) {
@@ -48,9 +49,13 @@ class Edit extends React.Component {
                                 initialValue: '',
                             })(
                                 <Select>
-                                    <Option value="Y">允许交易</Option>
-                                    <Option value="N">禁止交易</Option>
-                                    <Option value="C">只可平仓</Option>
+                                    {
+                                        clientGroups.map((c) => {
+                                            return (
+                                                <Option key={c.clientGroupNo} value={c.clientGroupNo}>{c.clientGroupNo}</Option>
+                                            )
+                                        })
+                                    }
                                 </Select>,
                             )}
                         </FormItem>

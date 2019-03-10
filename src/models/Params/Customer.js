@@ -46,10 +46,7 @@ export default {
         
         // // 删除
         async addCustomerAsync({ params, callback }, rootState) {
-            const {
-                App: { userId },
-            } = rootState
-            const res = await ApiService.post('/api/clientRateRelation/add', Object.assign(params, { id: userId }))
+            const res = await ApiService.post('/api/clientRateRelation/add', params)
 
             if (res.code === 200) {
                 callback && callback()

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import pick from 'lodash/pick'
 
 // modules
-import { Table, Modal, Row, Col, Button, Form } from 'antd'
+import { Table, Modal, Row, Col, Button, Form, notification } from 'antd'
 import columns from './columns'
 import Edit from './Edit'
 
@@ -40,6 +40,10 @@ export default class Customer extends React.Component {
                 type: 1
             },
         })
+        this.props.dispatch({
+            type: 'Agent/fetchAgentAsync',
+            payload: {}
+        })
     }
     fetch = payload => {
         this.props.dispatch({
@@ -51,22 +55,22 @@ export default class Customer extends React.Component {
         // const actionName = action === 'add' ? 'addMarketInfoAsync' : 'updateMarketInfoAsync'
         const params = pick(values, ['clientGroupNo', 'depositTemplateId', 'feeTemplateId'])
         Object.assign(params, {riskTemplateId: 0})
-        console.log(params)
-        // this.props.dispatch({
-        //     type: `Customer/addCustomerAsync`,
-        //     payload: {
-        //         params,
-        //         callback: () => {
-        //             notification.info({
-        //                 message: '提示',
-        //                 description: '添加成功',
-        //             })
-        //             this.fetch({
-        //                 pageNo: 0
-        //             })
-        //         },
-        //     },
-        // })
+
+        this.props.dispatch({
+            type: `Customer/addCustomerAsync`,
+            payload: {
+                params,
+                callback: () => {
+                    notification.info({
+                        message: '提示',
+                        description: '添加成功',
+                    })
+                    this.fetch({
+                        pageNo: 0
+                    })
+                },
+            },
+        })
     }
     handleAdd = () => {
         this.setState({

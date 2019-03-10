@@ -42,14 +42,18 @@ export default {
                 })
             }
         },
+
+        
         // // 删除
-        // async deleteCustomereAsync({ id, callback }) {
-        //     const res = await ApiService.delete(`/api/contract/delete/${id}`)
+        async addCustomerAsync({ params, callback }, rootState) {
+            const {
+                App: { userId },
+            } = rootState
+            const res = await ApiService.post('/api/clientRateRelation/add', Object.assign(params, { id: userId }))
 
-        //     if (res.code === 200) {
-        //         callback && callback()
-        //     }
-        // },
-
+            if (res.code === 200) {
+                callback && callback()
+            }
+        },
     }),
 }

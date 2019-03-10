@@ -1,7 +1,3 @@
-import moment from "moment";
-import React from 'react'
-import { Row, Col, Button, Modal, notification } from 'antd'
-
 export default [
     {
         title: '客户组名称',

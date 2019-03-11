@@ -13,6 +13,9 @@ const Option = Select.Option
 }))
 
 class Edit extends React.Component {
+    state = {
+        name: '',
+    }
     render() {
 
         const { Template, clientGroups } = this.props
@@ -38,8 +41,9 @@ class Edit extends React.Component {
                 span: 16,
             },
         }
-
+        const { name } = this.state
         return (
+            
             <Form>
                 <Row gutter={16}>
                     <Col span={8}>
@@ -48,7 +52,14 @@ class Edit extends React.Component {
                                 rules: [{ required: true, message: '客户组编号不能为空' }],
                                 initialValue: '',
                             })(
-                                <Select>
+                                <Select
+                                    onChange={(nextValues) => {
+                                        this.setState({
+                                            name: clientGroups.filter( i => i.clientGroupNo == nextValues)[0].clientGroupName
+                                        })
+                                    }
+                                    }
+                                >
                                     {
                                         clientGroups.map((c) => {
                                             return (
@@ -62,7 +73,7 @@ class Edit extends React.Component {
                     </Col>
                     <Col span={8}>
                         <FormItem {...formItemLayout} label="客户组名称">
-                            <div>名称</div>
+                            <div>{name}</div>
                         </FormItem>
                     </Col>
                     <Col span={8}>

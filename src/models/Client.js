@@ -20,10 +20,7 @@ const Client = {
         },
     },
     effects: dispatch => ({
-        async fetchClientsAsync({ pageNo = 0, params = {} }, rootState) {
-            const {
-                Client: { pageSize },
-            } = rootState
+        async fetchClientsAsync({ pageNo = 0, params = {}, pageSize = 10 }, rootState) {
             const { clientId, agentId, groupId } = params
             const res = await ApiService.post(`/api/client/query/page?pageIndex=${pageNo}&pageSize=${pageSize}`, {
                 clientNo: clientId,

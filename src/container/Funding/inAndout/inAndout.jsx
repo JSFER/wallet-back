@@ -17,7 +17,7 @@ export default class InAndout extends React.Component {
     state = {
         pageNo: '',
         visible: false,
-        clientNo: '',
+        addClientNo: '',
         outOrIn: 'O',
         changeMoney: 0,
         currencyNo: '',
@@ -116,13 +116,13 @@ export default class InAndout extends React.Component {
                 <Modal
                     visible={this.state.visible}
                     onOk={() => {
-                        const { clientNo, changeMoney, outOrIn, currencyNo } = this.state
+                        const { addClientNo, changeMoney, outOrIn, currencyNo } = this.state
                         this.props.dispatch({
                             type: 'InAndout/addOutAndIn',
                             payload: {
                                 body: {
                                     mode: 1,
-                                    clientNo,
+                                    clientNo: addClientNo,
                                     changeMoney,
                                     outOrIn,
                                     remark: '',
@@ -151,10 +151,10 @@ export default class InAndout extends React.Component {
                                 style={{ width: '100%' }}
                                 onChange={value => {
                                     this.setState({
-                                        clientNo: value,
+                                        addClientNo: value,
                                     })
                                 }}
-                                value={this.state.clientNo}
+                                value={this.state.addClientNo}
                             >
                                 {clients.map((client, idx) => {
                                     return (

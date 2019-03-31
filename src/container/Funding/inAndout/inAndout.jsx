@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 // modules
-import { Select, Table, Input, Modal, Row, Col, Button, Form } from 'antd'
+import { notification, Select, Table, Input, Modal, Row, Col, Button, Form } from 'antd'
 import columns from './inAndoutColumns'
 
 const FormItem = Form.Item
@@ -11,12 +11,15 @@ const FormItem = Form.Item
 @connect(state => ({
     InAndout: state.InAndout,
     clients: state.Client.clients,
-    currencies: state.Currency.currencies
+    currencies: state.Currency.currencies,
 }))
 export default class InAndout extends React.Component {
     state = {
         pageNo: '',
         visible: false,
+        clientNo: '',
+        outOrIn: '入金',
+        changeMoney: 0,
     }
     componentDidMount() {
         this.fetch({
@@ -26,14 +29,14 @@ export default class InAndout extends React.Component {
             type: 'Client/fetchClientsAsync',
             payload: {
                 pageNo: 0,
-                pageSize: 100
-            }
+                pageSize: 100,
+            },
         })
         this.props.dispatch({
             type: 'Currency/fetchCurrenciesAsync',
             payload: {
-                pageNo: 0
-            }
+                pageNo: 0,
+            },
         })
     }
     fetch = payload => {
@@ -110,7 +113,29 @@ export default class InAndout extends React.Component {
                 />
                 <Modal
                     visible={this.state.visible}
-                    onOk={() => {}}
+                    onOk={() => {
+                        const { clientNo, changeMoney, outOrIn } = this.state
+                        this.props.dispatch({
+                            type: 'InAndout/addOutAndIn',
+                            payload: {
+                                body: {
+                                    mode: 0,
+                                    clientNo,
+                                    changeMoney,
+                                    outOrIn,
+                                    remark: '',
+                                },
+                                callback: () => {
+                                    notification.success({
+                                        message: '添加成功',
+                                    })
+                                    this.setState({
+                                        visible: false,
+                                    })
+                                },
+                            },
+                        })
+                    }}
                     onCancel={() => {
                         this.setState({
                             visible: false,
@@ -119,31 +144,54 @@ export default class InAndout extends React.Component {
                 >
                     <div>
                         <FormItem {...formItemLayout} label={'客户账户'}>
-                            <Select style={{ width: '100%' }}>
-                                {
-                                    clients.map((client, idx) => {
-                                        return <Select.Option key={idx} value={client.clientNo}>{client.clientName}</Select.Option>
+                            <Select
+                                style={{ width: '100%' }}
+                                onChange={value => {
+                                    this.setState({
+                                        clientNo: value
                                     })
-                                }
+                                }}
+                                value={this.state.clientNo}
+                            >
+                                {clients.map((client, idx) => {
+                                    return (
+                                        <Select.Option key={idx} value={client.clientNo}>
+                                            {client.clientName}
+                                        </Select.Option>
+                                    )
+                                })}
                             </Select>
                         </FormItem>
                         <FormItem {...formItemLayout} label={'出入金方式'}>
-                            <Select style={{ width: '100%' }}>
-                                <Select.Option value={0}>出金</Select.Option>
-                                <Select.Option value={1}>入金</Select.Option>
+                            <Select
+                                style={{ width: '100%' }}
+                                onChange={value => {
+                                    this.setState({
+                                        outOrIn: value
+                                    })
+                                }}
+                                value={this.state.outOrIn}
+                            >
+                                <Select.Option value={'出金'}>出金</Select.Option>
+                                <Select.Option value={'入金'}>入金</Select.Option>
                             </Select>
                         </FormItem>
                         <FormItem {...formItemLayout} label={'币种'}>
                             <Select style={{ width: '100%' }}>
-                                {
-                                    this.props.currencies.map((cur) => {
-                                        return <Select.Option value={cur.currencyNo}>{cur.currencyName}</Select.Option>
-                                    })
-                                }
+                                {this.props.currencies.map(cur => {
+                                    return <Select.Option value={cur.currencyNo}>{cur.currencyName}</Select.Option>
+                                })}
                             </Select>
                         </FormItem>
                         <FormItem {...formItemLayout} label={'金额'}>
-                            <Input />
+                            <Input
+                                value={this.state.changeMoney}
+                                onChange={(eve) => {
+                                    this.setState({
+                                        changeMoney: eve.target.value,
+                                    })
+                                }}
+                            />
                         </FormItem>
                     </div>
                 </Modal>

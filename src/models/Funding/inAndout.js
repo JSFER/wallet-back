@@ -38,6 +38,23 @@ export default {
                     },
                 })
             }
+        },
+        async addOutAndIn({ body, callback }, rootState){
+            const { userId } = rootState.App
+            const res = await ApiService.post(`/api/fund/out/in/add`, {
+                ...body,
+                userId
+            })
+
+            if (res.code === 200) {
+                callback && callback()
+                dispatch({
+                    type: 'InAndout/fetchInAndoutAsync',
+                    payload: {
+                        pageNo: 0
+                    }
+                })
+            }
         }
     }),
 }

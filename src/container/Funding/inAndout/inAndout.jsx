@@ -18,8 +18,9 @@ export default class InAndout extends React.Component {
         pageNo: '',
         visible: false,
         clientNo: '',
-        outOrIn: '入金',
+        outOrIn: 'O',
         changeMoney: 0,
+        currencyNo: '',
     }
     componentDidMount() {
         this.fetch({
@@ -101,6 +102,7 @@ export default class InAndout extends React.Component {
                     </Col>
                 </Row>
                 <Table
+                    rowKey='id'
                     style={{ marginTop: 20 }}
                     columns={columns}
                     dataSource={InAndouts}
@@ -114,16 +116,17 @@ export default class InAndout extends React.Component {
                 <Modal
                     visible={this.state.visible}
                     onOk={() => {
-                        const { clientNo, changeMoney, outOrIn } = this.state
+                        const { clientNo, changeMoney, outOrIn, currencyNo } = this.state
                         this.props.dispatch({
                             type: 'InAndout/addOutAndIn',
                             payload: {
                                 body: {
-                                    mode: 0,
+                                    mode: 1,
                                     clientNo,
                                     changeMoney,
                                     outOrIn,
                                     remark: '',
+                                    currencyNo,
                                 },
                                 callback: () => {
                                     notification.success({
@@ -148,7 +151,7 @@ export default class InAndout extends React.Component {
                                 style={{ width: '100%' }}
                                 onChange={value => {
                                     this.setState({
-                                        clientNo: value
+                                        clientNo: value,
                                     })
                                 }}
                                 value={this.state.clientNo}
@@ -167,26 +170,34 @@ export default class InAndout extends React.Component {
                                 style={{ width: '100%' }}
                                 onChange={value => {
                                     this.setState({
-                                        outOrIn: value
+                                        outOrIn: value,
                                     })
                                 }}
                                 value={this.state.outOrIn}
                             >
-                                <Select.Option value={'出金'}>出金</Select.Option>
-                                <Select.Option value={'入金'}>入金</Select.Option>
+                                <Select.Option value={'O'}>出金</Select.Option>
+                                <Select.Option value={'I'}>入金</Select.Option>
                             </Select>
                         </FormItem>
                         <FormItem {...formItemLayout} label={'币种'}>
-                            <Select style={{ width: '100%' }}>
+                            <Select
+                                style={{ width: '100%' }}
+                                onChange={value => {
+                                    this.setState({
+                                        currencyNo: value,
+                                    })
+                                }}
+                                value={this.state.currencyNo}
+                            >
                                 {this.props.currencies.map(cur => {
-                                    return <Select.Option value={cur.currencyNo}>{cur.currencyName}</Select.Option>
+                                    return <Select.Option key={cur.currencyNo} value={cur.currencyNo}>{cur.currencyName}</Select.Option>
                                 })}
                             </Select>
                         </FormItem>
                         <FormItem {...formItemLayout} label={'金额'}>
                             <Input
                                 value={this.state.changeMoney}
-                                onChange={(eve) => {
+                                onChange={eve => {
                                     this.setState({
                                         changeMoney: eve.target.value,
                                     })

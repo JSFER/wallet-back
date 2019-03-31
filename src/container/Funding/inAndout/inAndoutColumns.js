@@ -3,7 +3,7 @@ import moment from "moment";
 export default [
     {
         title: '出入金ID',
-        dataIndex: 'outInMoneyId',
+        dataIndex: 'id',
         key: 'outInMoneyId',
     },
     {
@@ -15,6 +15,9 @@ export default [
         title: '资金方向',
         dataIndex: 'outOrIn',
         key: 'outOrIn',
+        render: (d) => {
+            return d === 'O' ? '出金' : '入金'
+        }
     },
     {
         title: '变动金额',
@@ -27,14 +30,15 @@ export default [
         key: 'changeTime',
     },
     {
-        title: '修改操作员编号',
-        dataIndex: 'userNo',
-        key: 'userNo',
+        title: '币种',
+        dataIndex: 'currencyNo',
     },
     {
         title: '方式',
         dataIndex: 'mode',
-        key: 'mode',
+        render: (m) => {
+            return m == 1 ? '后台人工' : '网页自动'
+        }
     },
     {
         title: '备注',

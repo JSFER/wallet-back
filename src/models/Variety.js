@@ -5,7 +5,7 @@ const Variety = {
     state: {
         varieties: [],
         pageNo: 0,
-        pageSize: 10,
+        pageSize: 50,
         total: 0,
     },
     reducers: {
